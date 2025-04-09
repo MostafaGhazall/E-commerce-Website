@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
+import { usePreferenceStore } from './contexts/usePreferenceStore';
 import { seedProducts } from './services/seedProducts';
 
 import Home from './pages/Home';
@@ -15,6 +15,17 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 const App = () => {
+  const theme = usePreferenceStore((state) => state.theme);
+  const language = usePreferenceStore((state) => state.language);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
+  }, [language]);
+
   useEffect(() => {
     seedProducts();
   }, []);

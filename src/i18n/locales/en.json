@@ -1,0 +1,35 @@
+{
+  "home": "Home",
+  "shop": "Shop",
+  "wishlist": "Wishlist",
+  "cart": "Cart",
+  "checkout": "Checkout",
+  "welcome": "Welcome to MyShop",
+  "intro": "Discover quality products tailored for your lifestyle.",
+  "shopNow": "Shop Now",
+  "categories": {
+    "clothing": "Clothing",
+    "clothingDesc": "Timeless fashion essentials",
+    "accessories": "Accessories",
+    "accessoriesDesc": "Bags, bottles, and more",
+    "eco": "Eco Picks",
+    "ecoDesc": "Sustainable and smart"
+  },
+  "featured": "Featured Products",
+  "noProducts": "No products yet...",
+  "cta": {
+    "title": "Don't miss out",
+    "desc": "Great deals and handpicked collections await.",
+    "button": "Browse All Products"
+  },
+  "fullName": "Full Name",
+  "email": "Email",
+  "shippingAddress": "Shipping Address",
+  "placeOrder": "Place Order",
+  "orderSummary": "Order Summary",
+  "total": "Total",
+  "emptyCart": "Your cart is empty",
+  "quantity": "Qty",
+  "fillAllFields": "Please fill in all fields",
+  "orderSuccess": "Order placed successfully!"
+}

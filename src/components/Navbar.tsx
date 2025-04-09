@@ -1,24 +1,28 @@
-import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useCartStore } from "../contexts/useCartStore";
+import { usePreferenceStore } from "../contexts/usePreferenceStore";
+import { useTranslation } from 'react-i18next';
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const [isDark, setIsDark] = useState(false);
   const cart = useCartStore((state) => state.cart);
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    setIsDark(savedTheme === "dark");
-    document.documentElement.classList.toggle("dark", savedTheme === "dark");
-  }, []);
+  const theme = usePreferenceStore((state) => state.theme);
+  const toggleTheme = usePreferenceStore((state) => state.toggleTheme);
 
-  const toggleTheme = () => {
-    const newTheme = isDark ? "light" : "dark";
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    setIsDark(!isDark);
-  };
+  const language = usePreferenceStore((state) => state.language);
+  const setLanguage = usePreferenceStore((state) => state.setLanguage);
+
+  const { t, i18n } = useTranslation();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+    localStorage.setItem("lang", language);
+  }, [language]);
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50">
@@ -28,8 +32,8 @@ export default function Navbar() {
           MyShop
         </Link>
 
-        {/* Navigation Links */}
-        <div className="space-x-4 flex items-center">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex space-x-4 items-center">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -38,7 +42,7 @@ export default function Navbar() {
                 : "text-gray-700 dark:text-gray-200"
             }
           >
-            Home
+            {t("home")}
           </NavLink>
           <NavLink
             to="/products"
@@ -48,7 +52,7 @@ export default function Navbar() {
                 : "text-gray-700 dark:text-gray-200"
             }
           >
-            Shop
+            {t("shop")}
           </NavLink>
           <NavLink
             to="/wishlist"
@@ -58,10 +62,8 @@ export default function Navbar() {
                 : "text-gray-700 dark:text-gray-200"
             }
           >
-            Wishlist
+            {t("wishlist")}
           </NavLink>
-
-          {/* Cart Icon with Count */}
           <NavLink
             to="/cart"
             className="relative text-gray-700 dark:text-gray-200 hover:text-maroon"
@@ -73,16 +75,85 @@ export default function Navbar() {
               </span>
             )}
           </NavLink>
+          <button
+            onClick={toggleTheme}
+            className="text-sm text-gray-500 dark:text-gray-300"
+          >
+            {theme === "dark" ? "🌙" : "☀️"}
+          </button>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as "en" | "ar")}
+            className="text-sm border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
+          >
+            <option value="en">EN</option>
+            <option value="ar">AR</option>
+          </select>
         </div>
 
-        {/* Theme Toggle */}
+        {/* Mobile Menu Button */}
         <button
-          onClick={toggleTheme}
-          className="ml-4 text-sm text-gray-500 dark:text-gray-300"
+          className="md:hidden text-gray-700 dark:text-white"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
-          {isDark ? "🌙 Dark" : "☀️ Light"}
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white dark:bg-gray-900 px-4 py-4 space-y-4 border-t border-gray-200 dark:border-gray-700">
+          <NavLink
+            to="/"
+            className="block text-gray-700 dark:text-gray-200"
+            onClick={() => setMenuOpen(false)}
+          >
+            {t("home")}
+          </NavLink>
+          <NavLink
+            to="/products"
+            className="block text-gray-700 dark:text-gray-200"
+            onClick={() => setMenuOpen(false)}
+          >
+            {t("shop")}
+          </NavLink>
+          <NavLink
+            to="/wishlist"
+            className="block text-gray-700 dark:text-gray-200"
+            onClick={() => setMenuOpen(false)}
+          >
+            {t("wishlist")}
+          </NavLink>
+          <NavLink
+            to="/cart"
+            className="block text-gray-700 dark:text-gray-200 relative"
+            onClick={() => setMenuOpen(false)}
+          >
+            🛒 {cartCount > 0 && (
+              <span className="ml-1 bg-maroon text-white text-xs px-1.5 py-0.5 rounded-full">
+                {cartCount}
+              </span>
+            )}
+          </NavLink>
+
+          <div className="flex items-center gap-4 pt-2">
+            <button
+              onClick={toggleTheme}
+              className="text-sm text-gray-500 dark:text-gray-300"
+            >
+              {theme === "dark" ? "🌙" : "☀️"}
+            </button>
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value as "en" | "ar")}
+              className="text-sm border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
+            >
+              <option value="en">EN</option>
+              <option value="ar">AR</option>
+            </select>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
