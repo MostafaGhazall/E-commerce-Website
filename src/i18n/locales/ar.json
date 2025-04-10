@@ -37,10 +37,14 @@
   "customer": "العميل",
   "account": "الحساب",
   "orderHistory": "تاريخ الطلبات",
-  "contact": "اتصل بنا",
-  "social": "روابط التواصل",
+  "contact": "تواصل معنا",
+  "social": "تابعنا",
   "instagram": "إنستغرام",
   "twitter": "تويتر",
   "facebook": "فيسبوك",
-  "rights": "جميع الحقوق محفوظة."
+  "rights": "جميع الحقوق محفوظة.",
+  "orderID": "رقم الطلب",
+  "viewDetails": "عرض التفاصيل",
+  "close": "إغلاق",
+  "noOrders": "لا توجد طلبات حتى الآن"
 }

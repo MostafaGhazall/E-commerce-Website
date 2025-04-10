@@ -42,5 +42,8 @@
   "instagram": "Instagram",
   "twitter": "Twitter",
   "facebook": "Facebook",
-  "rights": "All rights reserved."
+  "rights": "All rights reserved.",
+  "orderID": "Order ID",
+  "viewDetails": "View Details",
+  "close": "Close"
 }

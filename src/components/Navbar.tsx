@@ -20,6 +20,13 @@ export default function Navbar() {
     localStorage.setItem("lang", language);
   }, [language]);
 
+  const navLinks = [
+    { path: "/", label: t("home") },
+    { path: "/products", label: t("shop") },
+    { path: "/wishlist", label: t("wishlist") },
+    { path: "/orders", label: t("Orders") },
+  ];
+
   return (
     <nav className="bg-theme shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -30,17 +37,17 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex space-x-4 items-center">
-          {["/", "/products", "/wishlist"].map((path, i) => (
+          {navLinks.map((link) => (
             <NavLink
-              key={path}
-              to={path}
+              key={link.path}
+              to={link.path}
               className={({ isActive }) =>
                 isActive
                   ? "text-white font-semibold"
                   : "text-white/80 hover:text-white"
               }
             >
-              {t(["home", "shop", "wishlist"][i])}
+              {link.label}
             </NavLink>
           ))}
 
@@ -54,7 +61,7 @@ export default function Navbar() {
             )}
           </NavLink>
 
-          {/* Language selector */}
+          {/* Language Selector */}
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value as "en" | "ar")}
@@ -77,14 +84,17 @@ export default function Navbar() {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="md:hidden bg-theme px-4 py-4 space-y-4 border-t border-theme/40">
-          {["/", "/products", "/wishlist", "/cart"].map((path, i) => (
+          {[
+            ...navLinks,
+            { path: "/cart", label: t("cart") },
+          ].map((link) => (
             <NavLink
-              key={path}
-              to={path}
+              key={link.path}
+              to={link.path}
               onClick={() => setMenuOpen(false)}
               className="block text-white"
             >
-              {t(["home", "shop", "wishlist", "cart"][i])}
+              {link.label}
             </NavLink>
           ))}
 

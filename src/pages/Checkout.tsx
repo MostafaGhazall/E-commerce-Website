@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import { useOrderStore } from '../contexts/useOrderStore';
 
 const Checkout = () => {
   const { cart, clearCart } = useCartStore();
   const { products, loadProducts } = useProductStore();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { addOrder } = useOrderStore();
 
   const [form, setForm] = useState({
     name: '',
@@ -20,6 +22,13 @@ const Checkout = () => {
   useEffect(() => {
     if (products.length === 0) loadProducts();
   }, []);
+
+  const getProduct = (id: string) => products.find((p) => p.id === id);
+
+  const total = cart.reduce((sum, item) => {
+    const product = getProduct(item.id);
+    return sum + (product?.price ?? 0) * item.quantity;
+  }, 0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,17 +41,30 @@ const Checkout = () => {
       return;
     }
 
+    const orderItems = cart.map((item) => {
+      const product = getProduct(item.id);
+      return {
+        id: item.id,
+        name: product?.name || '',
+        price: product?.price || 0,
+        quantity: item.quantity,
+        size: item.size,
+      };
+    });
+
+    const newOrder = {
+      id: crypto.randomUUID(),
+      date: new Date().toISOString(),
+      items: orderItems,
+      total,
+      shipping: form,
+    };
+
+    addOrder(newOrder);
     toast.success(t('orderSuccess') || 'Order placed successfully!');
     clearCart();
-    navigate('/');
+    navigate('/orders');
   };
-
-  const getProduct = (id: string) => products.find((p) => p.id === id);
-
-  const total = cart.reduce((sum, item) => {
-    const product = getProduct(item.id);
-    return sum + (product?.price ?? 0) * item.quantity;
-  }, 0);
 
   if (cart.length === 0) {
     return (
