@@ -31,5 +31,16 @@
   "emptyCart": "عربة التسوق فارغة",
   "quantity": "الكمية",
   "fillAllFields": "يرجى ملء جميع الحقول",
-  "orderSuccess": "تم تقديم الطلب بنجاح!"
+  "orderSuccess": "تم تقديم الطلب بنجاح!",
+  "description": "تسوق عصري بطريقة بسيطة.",
+  "quickLinks": "روابط سريعة",
+  "customer": "العميل",
+  "account": "الحساب",
+  "orderHistory": "تاريخ الطلبات",
+  "contact": "اتصل بنا",
+  "social": "روابط التواصل",
+  "instagram": "إنستغرام",
+  "twitter": "تويتر",
+  "facebook": "فيسبوك",
+  "rights": "جميع الحقوق محفوظة."
 }

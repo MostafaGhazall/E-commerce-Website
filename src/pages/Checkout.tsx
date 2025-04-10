@@ -53,7 +53,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10 text-gray-800 bg-white">
       {/* Form Section */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <h2 className="text-2xl font-bold mb-4">{t('checkout')}</h2>
@@ -64,7 +64,7 @@ const Checkout = () => {
           placeholder={t('fullName') || 'Full Name'}
           value={form.name}
           onChange={handleChange}
-          className="w-full border px-4 py-2 rounded"
+          className="w-full border px-4 py-2 rounded bg-white"
         />
 
         <input
@@ -73,7 +73,7 @@ const Checkout = () => {
           placeholder={t('email') || 'Email'}
           value={form.email}
           onChange={handleChange}
-          className="w-full border px-4 py-2 rounded"
+          className="w-full border px-4 py-2 rounded bg-white"
         />
 
         <input
@@ -82,12 +82,12 @@ const Checkout = () => {
           placeholder={t('shippingAddress') || 'Shipping Address'}
           value={form.address}
           onChange={handleChange}
-          className="w-full border px-4 py-2 rounded"
+          className="w-full border px-4 py-2 rounded bg-white"
         />
 
         <button
           type="submit"
-          className="bg-maroon text-white px-6 py-2 rounded hover:bg-opacity-90 w-full sm:w-auto"
+          className="bg-[var(--primary-maroon)] text-white px-6 py-2 rounded hover:bg-opacity-90 w-full sm:w-auto"
         >
           {t('placeOrder')}
         </button>

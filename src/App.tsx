@@ -10,29 +10,27 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import UserProfile from './pages/UserProfile';
+import Wishlist from './pages/Wishlist';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 const App = () => {
-  const theme = usePreferenceStore((state) => state.theme);
   const language = usePreferenceStore((state) => state.language);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-  }, [theme]);
-
+  // Apply RTL/LTR direction
   useEffect(() => {
     document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
   }, [language]);
 
+  // Seed products once
   useEffect(() => {
     seedProducts();
   }, []);
 
   return (
     <Router>
-      <div className="bg-white dark:bg-gray-900 min-h-screen flex flex-col">
+      <div className="bg-white min-h-screen flex flex-col text-gray-900">
         <Toaster position="top-right" />
         <Navbar />
         <div className="flex-grow">
@@ -43,6 +41,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/wishlist" element={<Wishlist />} />
           </Routes>
         </div>
         <Footer />

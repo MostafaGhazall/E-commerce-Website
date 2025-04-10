@@ -38,7 +38,7 @@ const Cart = () => {
   if (loading || products.length === 0) {
     return (
       <div className="flex justify-center items-center min-h-[300px]">
-        <div className="animate-spin h-8 w-8 border-4 border-maroon border-t-transparent rounded-full"></div>
+        <div className="animate-spin h-8 w-8 border-4 border-theme border-t-transparent rounded-full"></div>
       </div>
     );
   }
@@ -47,13 +47,15 @@ const Cart = () => {
     return (
       <div className="max-w-4xl mx-auto py-20 text-center">
         <h2 className="text-xl font-bold mb-4">Your cart is empty</h2>
-        <Link to="/products" className="text-maroon underline">Go shopping</Link>
+        <Link to="/products" className="text-theme underline">
+          Go shopping
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-4xl mx-auto px-4 py-10 text-gray-800 bg-white">
       <h2 className="text-2xl font-bold mb-6">Your Cart</h2>
 
       <div className="space-y-6">
@@ -74,7 +76,9 @@ const Cart = () => {
                 />
                 <div>
                   <h3 className="font-semibold">{product.name}</h3>
-                  <p className="text-sm text-gray-500">${product.price.toFixed(2)}</p>
+                  <p className="text-sm text-gray-500">
+                    ${product.price.toFixed(2)}
+                  </p>
                 </div>
               </div>
 
@@ -83,7 +87,9 @@ const Cart = () => {
                   type="number"
                   min={1}
                   value={item.quantity}
-                  onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                  onChange={(e) =>
+                    handleQuantityChange(item.id, parseInt(e.target.value))
+                  }
                   className="w-16 border rounded px-2 py-1 text-center"
                 />
                 <button
@@ -111,7 +117,7 @@ const Cart = () => {
       <div className="mt-6 text-right">
         <Link
           to="/checkout"
-          className="bg-maroon text-white px-6 py-2 rounded hover:bg-opacity-90"
+          className="bg-theme text-white px-6 py-2 rounded hover:bg-opacity-90 transition"
         >
           Proceed to Checkout
         </Link>

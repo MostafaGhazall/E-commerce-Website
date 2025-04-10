@@ -1,43 +1,99 @@
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import {
+  Instagram,
+  Twitter,
+  Facebook
+} from 'lucide-react';
+
 export default function Footer() {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.dir() === 'rtl';
+
+  const quickLinks = [
+    { label: t('home'), to: '/' },
+    { label: t('shop'), to: '/products' },
+    { label: t('cart'), to: '/cart' },
+    { label: t('wishlist'), to: '/wishlist' },
+  ];
+
+  const customerLinks = [
+    { label: t('account'), to: '/profile' },
+    { label: t('orderHistory'), to: '/orders' },
+    { label: t('contact'), to: '/contact' },
+  ];
+
+  const socialLinks = [
+    { icon: Instagram, label: t('instagram'), href: '#' },
+    { icon: Twitter, label: t('twitter'), href: '#' },
+    { icon: Facebook, label: t('facebook'), href: '#' },
+  ];
+
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 mt-10">
-      <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <footer className="bg-theme/10 text-gray-700 mt-10" dir={isRTL ? 'rtl' : 'ltr'}>
+      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Brand / Description */}
         <div>
-          <h2 className="font-semibold text-maroon dark:text-white mb-2">MyShop</h2>
-          <p className="text-sm">Modern shopping made simple.</p>
+          <h2 className="font-semibold text-theme mb-2">MyShop</h2>
+          <p className="text-sm">{t('description')}</p>
         </div>
 
+        {/* Quick Links */}
         <div>
-          <h3 className="font-medium mb-2">Quick Links</h3>
+          <h3 className="font-medium mb-2">{t('quickLinks')}</h3>
           <ul className="space-y-1 text-sm">
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Shop</a></li>
-            <li><a href="/cart">Cart</a></li>
-            <li><a href="/wishlist">Wishlist</a></li>
+            {quickLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className="hover:text-theme transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-theme"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
+        {/* Customer */}
         <div>
-          <h3 className="font-medium mb-2">Customer</h3>
+          <h3 className="font-medium mb-2">{t('customer')}</h3>
           <ul className="space-y-1 text-sm">
-            <li><a href="/profile">Account</a></li>
-            <li><a href="/orders">Order History</a></li>
-            <li><a href="/contact">Contact Us</a></li>
+            {customerLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className="hover:text-theme transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-theme"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
+        {/* Social */}
         <div>
-          <h3 className="font-medium mb-2">Social</h3>
-          <ul className="space-y-1 text-sm">
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+          <h3 className="font-medium mb-2">{t('social')}</h3>
+          <ul className="space-y-2 text-sm">
+            {socialLinks.map(({ icon: Icon, label, href }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-theme transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-theme"
+                >
+                  <Icon size={18} /> {label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
-      <div className="text-center text-xs py-4 border-t border-gray-300 dark:border-gray-700">
-        &copy; {new Date().getFullYear()} MyShop. All rights reserved.
+      <div className="text-center text-xs py-4 border-t border-theme/30">
+        &copy; {new Date().getFullYear()} MyShop. {t('rights')}
       </div>
     </footer>
   );

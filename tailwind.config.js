@@ -1,11 +1,8 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  darkMode: 'class',
   theme: {
-    extend: {
-      colors: {
-        maroon: '#7a1315'
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

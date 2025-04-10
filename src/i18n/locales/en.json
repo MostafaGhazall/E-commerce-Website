@@ -31,5 +31,16 @@
   "emptyCart": "Your cart is empty",
   "quantity": "Qty",
   "fillAllFields": "Please fill in all fields",
-  "orderSuccess": "Order placed successfully!"
+  "orderSuccess": "Order placed successfully!",
+  "description": "Modern shopping made simple.",
+  "quickLinks": "Quick Links",
+  "customer": "Customer",
+  "account": "Account",
+  "orderHistory": "Order History",
+  "contact": "Contact Us",
+  "social": "Social",
+  "instagram": "Instagram",
+  "twitter": "Twitter",
+  "facebook": "Facebook",
+  "rights": "All rights reserved."
 }

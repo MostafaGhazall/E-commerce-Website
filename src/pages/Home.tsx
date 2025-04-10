@@ -15,14 +15,25 @@ const Home = () => {
   const featured = products.slice(0, 4);
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+    <div className="bg-white text-gray-800">
       {/* Hero */}
-      <section className="text-center py-20 px-4 bg-gradient-to-br from-maroon to-red-800 text-white">
+      <section
+        className="
+          text-center py-20 px-4 
+          bg-gradient-to-br from-[var(--primary-orange)] to-[var(--primary-pinky)] text-white
+        "
+      >
         <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('welcome')}</h1>
         <p className="max-w-xl mx-auto text-lg mb-6">{t('intro')}</p>
         <Link
           to="/products"
-          className="inline-block bg-white text-maroon font-semibold px-6 py-3 rounded hover:bg-gray-100 transition"
+          className="
+            inline-block 
+            bg-[var(--primary-sun)] text-gray-900 
+            font-semibold px-6 py-3 
+            rounded 
+            hover:bg-yellow-300 transition
+          "
         >
           {t('shopNow')}
         </Link>
@@ -30,18 +41,27 @@ const Home = () => {
 
       {/* Categories */}
       <section className="max-w-7xl mx-auto py-16 px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-          <h3 className="text-xl font-bold mb-2">{t('categories.clothing')}</h3>
-          <p className="text-sm">{t('categories.clothingDesc')}</p>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-          <h3 className="text-xl font-bold mb-2">{t('categories.accessories')}</h3>
-          <p className="text-sm">{t('categories.accessoriesDesc')}</p>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md transition">
-          <h3 className="text-xl font-bold mb-2">{t('categories.eco')}</h3>
-          <p className="text-sm">{t('categories.ecoDesc')}</p>
-        </div>
+        {[
+          { title: t('categories.clothing'), desc: t('categories.clothingDesc') },
+          { title: t('categories.accessories'), desc: t('categories.accessoriesDesc') },
+          { title: t('categories.eco'), desc: t('categories.ecoDesc') },
+        ].map((cat, i) => (
+          <div
+            key={i}
+            className="
+              bg-[var(--primary-sun)] 
+              text-gray-900
+              rounded-lg 
+              p-6 
+              shadow-sm 
+              hover:shadow-md 
+              transition
+            "
+          >
+            <h3 className="text-xl font-bold mb-2">{cat.title}</h3>
+            <p className="text-sm">{cat.desc}</p>
+          </div>
+        ))}
       </section>
 
       {/* Featured Products */}
@@ -59,12 +79,26 @@ const Home = () => {
       </section>
 
       {/* CTA */}
-      <section className="text-center py-16 px-4 bg-gray-100 dark:bg-gray-800">
+      <section
+        className="
+          text-center py-16 px-4 
+          bg-[var(--primary-orange)] 
+          text-white
+        "
+      >
         <h2 className="text-2xl font-bold mb-4">{t('cta.title')}</h2>
-        <p className="mb-6 text-gray-600 dark:text-gray-300">{t('cta.desc')}</p>
+        <p className="mb-6 text-white/80">{t('cta.desc')}</p>
         <Link
           to="/products"
-          className="inline-block bg-maroon text-white font-medium px-6 py-3 rounded hover:bg-opacity-90 transition"
+          className="
+            inline-block 
+            bg-white 
+            text-[var(--primary-orange)] 
+            font-medium 
+            px-6 py-3 
+            rounded 
+            hover:bg-gray-100 transition
+          "
         >
           {t('cta.button')}
         </Link>
