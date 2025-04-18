@@ -45,5 +45,17 @@
   "rights": "All rights reserved.",
   "orderID": "Order ID",
   "viewDetails": "View Details",
-  "close": "Close"
+  "close": "Close",
+  "Account Overview": "Account Overview",
+  "Account Details": "Account Details",
+  "Address Book": "Address Book",
+  "Edit": "Edit",
+  "Cancel": "Cancel",
+  "Save": "Save",
+  "Save Address": "Save Address",
+  "Email": "Email",
+  "Password": "Password",
+  "No Address": "No Address",
+  "Edit Address": "Edit Address",
+  "Add Address": "Add Address"
 }

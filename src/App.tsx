@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { usePreferenceStore } from './contexts/usePreferenceStore';
+import { useAuthStore } from './contexts/useAuthStore';
 import { seedProducts } from './services/seedProducts';
 
 import Home from './pages/Home';
@@ -11,22 +12,28 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import UserProfile from './pages/UserProfile';
 import Wishlist from './pages/Wishlist';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 const App = () => {
   const language = usePreferenceStore((state) => state.language);
+  const user = useAuthStore((state) => state.user);
 
-  // Apply RTL/LTR direction
   useEffect(() => {
     document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
   }, [language]);
 
-  // Seed products once
   useEffect(() => {
     seedProducts();
   }, []);
+
+  // Protected Route Wrapper
+  const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+    return user ? children : <Navigate to="/login" replace />;
+  };
 
   return (
     <Router>
@@ -40,8 +47,14 @@ const App = () => {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/profile" element={<UserProfile />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            } />
           </Routes>
         </div>
         <Footer />

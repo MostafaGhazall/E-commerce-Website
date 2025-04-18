@@ -25,13 +25,28 @@
   color: var(--primary-orange);
 }
 
-
 /* ====== Color Palette Variables ====== */
 
 :root {
-  --primary-sun: #FFEB3B;
-  --primary-amber: #FF9800;
-  --primary-orange: #FF5722;
-  --primary-redish: #F44336;
-  --primary-pinky: #E91E63;
+  --primary-sun: #ffeb3b;
+  --primary-amber: #ff9800;
+  --primary-orange: #ff5722;
+  --primary-redish: #f44336;
+  --primary-pinky: #e91e63;
 }
+
+@layer utilities {
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 300ms ease-out forwards;
+  }
+}
+

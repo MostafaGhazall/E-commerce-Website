@@ -46,5 +46,16 @@
   "orderID": "رقم الطلب",
   "viewDetails": "عرض التفاصيل",
   "close": "إغلاق",
-  "noOrders": "لا توجد طلبات حتى الآن"
+  "noOrders": "لا توجد طلبات حتى الآن",
+  "Save": "حفظ",
+  "Cancel": "إلغاء",
+  "Email": "البريد الإلكتروني",
+  "Password": "كلمة المرور",
+  "Account Details": "تفاصيل الحساب",
+  "Address Book": "دفتر العناوين",
+  "Account Overview": "نظرة عامة على الحساب",
+  "Edit": "تعديل",
+  "Edit Address": "تعديل العنوان",
+  "Add Address": "إضافة عنوان",
+  "No Address": "لا يوجد عنوان"
 }
