@@ -19,8 +19,8 @@ const Cart = () => {
     return acc + (product?.price ?? 0) * item.quantity;
   }, 0);
 
-  const handleRemove = (id: string) => {
-    removeFromCart(id);
+  const handleRemove = (id: string, size?: string) => {
+    removeFromCart(id, size);
     toast.success('Item removed from cart');
   };
 
@@ -29,9 +29,9 @@ const Cart = () => {
     toast.success('Cart cleared');
   };
 
-  const handleQuantityChange = (id: string, qty: number) => {
+  const handleQuantityChange = (id: string, qty: number, size?: string) => {
     if (qty < 1) return;
-    updateQuantity(id, qty);
+    updateQuantity(id, qty, size);
     toast.success('Quantity updated');
   };
 
@@ -65,7 +65,7 @@ const Cart = () => {
 
           return (
             <div
-              key={item.id}
+              key={`${item.id}-${item.size || 'default'}`} // Unique key with size
               className="flex items-center justify-between border-b pb-4 gap-4"
             >
               <div className="flex items-center gap-4">
@@ -79,6 +79,9 @@ const Cart = () => {
                   <p className="text-sm text-gray-500">
                     ${product.price.toFixed(2)}
                   </p>
+                  {item.size && (
+                    <p className="text-xs text-gray-500 mt-1">Size: {item.size}</p>
+                  )}
                 </div>
               </div>
 
@@ -88,12 +91,12 @@ const Cart = () => {
                   min={1}
                   value={item.quantity}
                   onChange={(e) =>
-                    handleQuantityChange(item.id, parseInt(e.target.value))
+                    handleQuantityChange(item.id, parseInt(e.target.value), item.size)
                   }
                   className="w-16 border rounded px-2 py-1 text-center"
                 />
                 <button
-                  onClick={() => handleRemove(item.id)}
+                  onClick={() => handleRemove(item.id, item.size)}
                   className="text-red-500 hover:underline text-sm"
                 >
                   Remove

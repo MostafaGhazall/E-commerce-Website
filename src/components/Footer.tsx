@@ -30,11 +30,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-theme/10 text-gray-700 mt-10" dir={isRTL ? 'rtl' : 'ltr'}>
+    <footer className="bg-gray-100 text-gray-700 mt-10" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
         {/* Brand / Description */}
         <div>
-          <h2 className="font-semibold text-theme mb-2">MyShop</h2>
+          <h2 className="font-semibold text-[var(--primary-orange)] mb-2">MyShop</h2>
           <p className="text-sm">{t('description')}</p>
         </div>
 
@@ -46,7 +46,7 @@ export default function Footer() {
               <li key={link.to}>
                 <Link
                   to={link.to}
-                  className="hover:text-theme transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-theme"
+                  className="hover:text-[var(--primary-orange)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-[var(--primary-orange)]"
                 >
                   {link.label}
                 </Link>
@@ -63,7 +63,7 @@ export default function Footer() {
               <li key={link.to}>
                 <Link
                   to={link.to}
-                  className="hover:text-theme transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-theme"
+                  className="hover:text-[var(--primary-orange)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-[var(--primary-orange)]"
                 >
                   {link.label}
                 </Link>
@@ -82,7 +82,7 @@ export default function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-theme transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-theme"
+                  className="flex items-center gap-2 hover:text-[var(--primary-orange)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-[var(--primary-orange)]"
                 >
                   <Icon size={18} /> {label}
                 </a>
@@ -92,7 +92,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="text-center text-xs py-4 border-t border-theme/30">
+      <div className="text-center text-xs py-4 border-t border-[var(--primary-orange)]/30">
         &copy; {new Date().getFullYear()} MyShop. {t('rights')}
       </div>
     </footer>

@@ -1,13 +1,17 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { CartItem } from '../types/CartItem';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { CartItem } from "../types/CartItem";
 
 interface CartState {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: string, size?: string) => void;
   clearCart: () => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  updateQuantity: (
+    id: string,
+    quantity: number,
+    size?: string
+  ) => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -16,7 +20,9 @@ export const useCartStore = create<CartState>()(
       cart: [],
 
       addToCart: (item) => {
-        const existing = get().cart.find((i) => i.id === item.id && i.size === item.size);
+        const existing = get().cart.find(
+          (i) => i.id === item.id && i.size === item.size
+        );
         if (existing) {
           // Update quantity if already exists
           set({
@@ -31,22 +37,28 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      removeFromCart: (id) => {
-        set({ cart: get().cart.filter((i) => i.id !== id) });
+      removeFromCart: (id, size) => {
+        set({ cart: get().cart.filter((i) => i.id !== id || i.size !== size) });
       },
 
       clearCart: () => set({ cart: [] }),
 
-      updateQuantity: (id, quantity) => {
-        set({
-          cart: get().cart.map((i) =>
-            i.id === id ? { ...i, quantity } : i
-          ),
-        });
+      updateQuantity: (id, quantity, size) => {
+        if (quantity <= 0) {
+          set({
+            cart: get().cart.filter((i) => !(i.id === id && i.size === size)),
+          });
+        } else {
+          set({
+            cart: get().cart.map((i) =>
+              i.id === id && i.size === size ? { ...i, quantity } : i
+            ),
+          });
+        }
       },
     }),
     {
-      name: 'cart-storage', // key in localStorage
+      name: "cart-storage", // key in localStorage
     }
   )
 );

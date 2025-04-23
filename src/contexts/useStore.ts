@@ -68,10 +68,11 @@ export const useProductStore = create<ProductState>((set, get) => ({
     let filtered = products.filter((product) => {
       const matchName = product.name.toLowerCase().includes(lowerQuery);
       const matchCategory = categoryFilter
-        ? product.category === categoryFilter
-        : product.category.toLowerCase().includes(lowerQuery); // allow search by category too
+        ? product.category.toLowerCase() === categoryFilter.toLowerCase()
+        : true; // No category filter applied
 
-      return matchName || matchCategory;
+      // Both searchQuery AND categoryFilter must match
+      return matchName && matchCategory;
     });
 
     // Sort

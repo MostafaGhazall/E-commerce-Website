@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProductStore } from '../contexts/useStore';
 import { useCartStore } from '../contexts/useCartStore';
@@ -7,8 +8,9 @@ const ProductDetails = () => {
   const { id } = useParams();
   const { products } = useProductStore();
   const product = products.find((p) => p.id === id);
-
   const addToCart = useCartStore((state) => state.addToCart);
+
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
 
   if (!product) {
     return (
@@ -19,7 +21,20 @@ const ProductDetails = () => {
   }
 
   const handleAdd = () => {
-    addToCart({ id: product.id, quantity: 1 });
+    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
+      toast.error('Please select a size.');
+      return;
+    }
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      image: product.images[0],
+      price: product.price,
+      quantity: 1,
+      size: selectedSize,
+    });
+
     toast.success(`${product.name} added to cart!`);
   };
 
@@ -44,6 +59,25 @@ const ProductDetails = () => {
             ${product.price.toFixed(2)}
           </p>
           <p className="text-gray-700 mb-6">{product.description}</p>
+
+          {/* Size Selection */}
+          {product.sizes && product.sizes.length > 0 && (
+            <div className="mb-4">
+              <label className="block mb-2 font-medium text-sm">Select Size:</label>
+              <select
+                value={selectedSize || ''}
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className="border border-gray-300 rounded px-3 py-2 w-full md:w-1/2"
+              >
+                <option value="">Choose a size</option>
+                {product.sizes.map((size: string) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <button
             onClick={handleAdd}

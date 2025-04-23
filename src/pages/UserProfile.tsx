@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useUserStore } from "../contexts/useUserStore";
 import { useTranslation } from "react-i18next";
+import { useUserStore } from "../contexts/useUserStore";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export default function UserProfile() {
   const { t } = useTranslation();
@@ -9,247 +10,200 @@ export default function UserProfile() {
     lastName,
     email,
     address,
+    city,
+    region,
+    postalcode,
+    country,
     phone,
     birthday,
     gender,
     updateUserProfile,
   } = useUserStore();
 
-  const [form, setForm] = useState({
-    firstName,
-    lastName,
-    email,
-    address,
-    addressLine2: "",
-    city: "",
-    region: "",
-    postalcode: "",
-    country: "",
-    phone,
-    birthday,
-    gender,
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      address,
+      city,
+      region,
+      postalcode,
+      country,
+      phone,
+    },
   });
 
-  const [editingEmail, setEditingEmail] = useState(false);
-  const [editingAddress, setEditingAddress] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const saveEmailInfo = () => {
-    if (!form.email || !form.password) {
-      alert("Email and Password must be filled.");
-      return;
-    }
-    updateUserProfile({ ...form });
-    setEditingEmail(false);
-  };
-
-  const saveAddressInfo = () => {
-    const requiredFields = [
-      form.firstName,
-      form.lastName,
-      form.address,
-      form.city,
-      form.region,
-      form.postalcode,
-      form.country,
-    ];
-    if (requiredFields.some((field) => !field.trim())) {
-      alert("Please fill in all required address fields.");
-      return;
-    }
-
-    updateUserProfile({ ...form });
+  const onSubmit = (data: any) => {
+    updateUserProfile({
+      firstName,
+      lastName,
+      email,
+      birthday,
+      gender,
+      ...data,
+    });
     setEditingAddress(false);
   };
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">{t("Account Overview")}</h1>
+  const [editingAddress, setEditingAddress] = useState(false);
 
-      <div className="grid grid-cols-1 gap-6">
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold text-gray-800 mb-10 text-center">
+        {t("Account Overview")}
+      </h1>
+
+      <div className="space-y-8">
         {/* Account Details */}
-        <div className="bg-white rounded shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">{t("Account Details")}</h2>
-          {!editingEmail ? (
-            <>
-              <p className="mb-4 text-gray-600">{email}</p>
-              <button
-                onClick={() => setEditingEmail(true)}
-                className="text-[var(--primary-maroon)] font-medium hover:cursor-pointer"
-              >
-                {t("Edit")}
-              </button>
-            </>
-          ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                saveEmailInfo();
-              }}
-              className="space-y-4"
-            >
-              <div>
-                <label className="block text-sm">{t("Email")}</label>
-                <input
-                  name="email"
-                  type="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full border px-3 py-2 rounded mt-1"
-                />
-              </div>
-              <div>
-                <label className="block text-sm">{t("Password")}</label>
-                <input
-                  name="password"
-                  type="password"
-                  value={form.password}
-                  onChange={handleChange}
-                  required
-                  className="w-full border px-3 py-2 rounded mt-1"
-                />
-              </div>
-              <div className="flex gap-3 mt-6 justify-end">
-                <button
-                  type="button"
-                  onClick={() => setEditingEmail(false)}
-                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded"
-                >
-                  {t("Cancel")}
-                </button>
-                <button
-                  type="submit"
-                  className="bg-[var(--primary-maroon)] text-white px-6 py-2 rounded hover:bg-opacity-90"
-                >
-                  {t("Save")}
-                </button>
-              </div>
-            </form>
+        <section className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            {t("Account Details")}
+          </h2>
+          {firstName && lastName && (
+            <p className="mb-1 text-gray-900 font-medium text-lg">
+              {firstName} {lastName}
+            </p>
           )}
-        </div>
+          <p className="mb-4 text-gray-600">{email}</p>
+        </section>
 
         {/* Address Book */}
-        <div className="bg-white rounded shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">{t("Address Book")}</h2>
+        <section className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">
+            {t("Address Book")}
+          </h2>
           {!editingAddress ? (
             <>
-              <p className="mb-2 text-gray-600">
-                {address ? address : t("No Address")}
-              </p>
+              <p className="mb-4 text-gray-600">{address || t("No Address")}</p>
               <button
-                onClick={() => setEditingAddress(true)}
-                className="text-[var(--primary-maroon)] font-medium hover:cursor-pointer"
+                onClick={() => {
+                  setEditingAddress(true);
+                  reset({ address, city, region, postalcode, country, phone });
+                }}
+                className="text-blue-600 font-medium hover:cursor-pointer"
               >
                 {address ? t("Edit Address") : t("Add Address")}
               </button>
             </>
           ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                saveAddressInfo();
-              }}
-              className="space-y-4"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div>
-                <label className="block text-sm">Full Name</label>
+                <label className="block text-sm text-gray-700">
+                  Address Line
+                </label>
                 <input
-                  name="firstName"
-                  value={form.firstName}
-                  onChange={handleChange}
-                  placeholder="Full Name"
-                  required
-                  className="w-full border px-3 py-2 rounded mt-1"
+                  {...register("address", { required: "Address is required" })}
+                  className="w-full border border-gray-300 px-4 py-2 rounded mt-1"
                 />
-              </div>
-              <div>
-                <label className="block text-sm">Address Line 1</label>
-                <input
-                  name="address"
-                  value={form.address}
-                  onChange={handleChange}
-                  placeholder="Street address, P.O. box, etc."
-                  required
-                  className="w-full border px-3 py-2 rounded mt-1"
-                />
-              </div>
-              <div>
-                <label className="block text-sm">Address Line 2</label>
-                <input
-                  name="addressLine2"
-                  value={form.addressLine2}
-                  onChange={handleChange}
-                  placeholder="Apartment, suite, unit, etc."
-                  className="w-full border px-3 py-2 rounded mt-1"
-                />
+                {errors.address && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.address.message}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm">City</label>
+                  <label className="block text-sm text-gray-700">City</label>
                   <input
-                    name="city"
-                    value={form.city}
-                    onChange={handleChange}
-                    required
-                    className="w-full border px-3 py-2 rounded mt-1"
+                    {...register("city", { required: "City is required" })}
+                    className="w-full border border-gray-300 px-4 py-2 rounded mt-1"
                   />
+                  {errors.city && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.city.message}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm">State/Province/Region</label>
+                  <label className="block text-sm text-gray-700">Region</label>
                   <input
-                    name="region"
-                    value={form.region}
-                    onChange={handleChange}
-                    required
-                    className="w-full border px-3 py-2 rounded mt-1"
+                    {...register("region", { required: "Region is required" })}
+                    className="w-full border border-gray-300 px-4 py-2 rounded mt-1"
                   />
+                  {errors.region && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.region.message}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm">ZIP/Postal Code</label>
+                  <label className="block text-sm text-gray-700">
+                    Postal Code
+                  </label>
                   <input
-                    name="postalcode"
-                    value={form.postalcode}
-                    onChange={handleChange}
-                    required
-                    className="w-full border px-3 py-2 rounded mt-1"
+                    {...register("postalcode", {
+                      required: "Postal Code is required",
+                      pattern: {
+                        value: /^[0-9]{3,10}$/,
+                        message: "Postal Code must be 3–10 digits",
+                      },
+                    })}
+                    className="w-full border border-gray-300 px-4 py-2 rounded mt-1"
                   />
+                  {errors.postalcode && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.postalcode.message}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm">Country</label>
+                  <label className="block text-sm text-gray-700">Country</label>
                   <input
-                    name="country"
-                    value={form.country}
-                    onChange={handleChange}
-                    required
-                    className="w-full border px-3 py-2 rounded mt-1"
+                    {...register("country", {
+                      required: "Country is required",
+                    })}
+                    className="w-full border border-gray-300 px-4 py-2 rounded mt-1"
                   />
+                  {errors.country && (
+                    <p className="text-sm text-red-600 mt-1">
+                      {errors.country.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-6 justify-end">
+              <div>
+                <label className="block text-sm text-gray-700">
+                  Phone (optional)
+                </label>
+                <input
+                  {...register("phone", {
+                    pattern: {
+                      value: /^[0-9+\-\s]{6,15}$/,
+                      message: "Invalid phone number",
+                    },
+                  })}
+                  className="w-full border border-gray-300 px-4 py-2 rounded mt-1"
+                />
+                {errors.phone && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.phone.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex justify-end gap-4 mt-6">
                 <button
                   type="button"
                   onClick={() => setEditingAddress(false)}
-                  className="bg-gray-200 text-gray-800 px-4 py-2 rounded"
+                  className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 hover:cursor-pointer"
                 >
                   {t("Cancel")}
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+                  className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer"
                 >
                   {t("Save Address")}
                 </button>
               </div>
             </form>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );

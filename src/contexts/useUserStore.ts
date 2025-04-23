@@ -14,8 +14,7 @@ interface UserProfile {
   country: string,
   postalcode: string,
   region: string,
-  password: string; // Include password in the profile
-  updateUserProfile: (profile: Omit<UserProfile, 'updateUserProfile'>) => void;
+  updateUserProfile: (profile: Partial<UserProfile>) => void;
 }
 
 // Define custom storage to satisfy PersistStorage interface
@@ -46,7 +45,6 @@ export const useUserStore = create<UserProfile>()(
       country: '',
       postalcode: '',
       region: '',
-      password: '', // Initialize password in the state
       updateUserProfile: (profile) => {
         // Update the user profile with the new data
         set({ ...profile });
