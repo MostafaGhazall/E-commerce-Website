@@ -1,5 +1,7 @@
 import { openDB } from 'idb';
 import type { Product } from '../types/Product';
+import type { ProductReview } from "../types/Product";
+
 
 const DB_NAME = 'ecommerce-db';
 const DB_VERSION = 1;
@@ -36,3 +38,14 @@ export const getProductById = async (id: string): Promise<Product | undefined> =
   const db = await initDB();
   return await db.get(STORE_NAME, id);
 };
+
+export const addReviewToProduct = async (productId: string, review: ProductReview) => {
+  const db = await initDB();
+  const product = await db.get(STORE_NAME, productId);
+  if (!product) return;
+
+  product.reviews = [...(product.reviews || []), review];
+  await db.put(STORE_NAME, product);
+};
+
+

@@ -10,10 +10,10 @@ interface UserProfile {
   phone: string;
   birthday: string;
   gender: string;
-  city: string,
-  country: string,
-  postalcode: string,
-  region: string,
+  city: string;
+  country: string;
+  postalcode: string;
+  region: string;
   updateUserProfile: (profile: Partial<UserProfile>) => void;
 }
 
@@ -47,7 +47,7 @@ export const useUserStore = create<UserProfile>()(
       region: '',
       updateUserProfile: (profile) => {
         // Update the user profile with the new data
-        set({ ...profile });
+        set((state) => ({ ...state, ...profile }));
       },
     }),
     {

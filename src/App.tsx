@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { usePreferenceStore } from './contexts/usePreferenceStore';
 import { useAuthStore } from './contexts/useAuthStore';
 import { seedProducts } from './services/seedProducts';
+import { useProductStore } from './contexts/useStore';
 
 import Home from './pages/Home';
 import ProductListing from './pages/ProductListing';
@@ -27,7 +28,11 @@ const App = () => {
   }, [language]);
 
   useEffect(() => {
-    seedProducts();
+    const load = async () => {
+      await seedProducts(); // Step 1: seed IndexedDB
+      await useProductStore.getState().loadProducts(); // Step 2: load into Zustand
+    };
+    load();
   }, []);
 
   // Protected Route Wrapper
