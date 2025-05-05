@@ -57,5 +57,11 @@
   "Password": "Password",
   "No Address": "No Address",
   "Edit Address": "Edit Address",
-  "Add Address": "Add Address"
+  "Add Address": "Add Address",
+  "No Orders": "You have no orders yet.",
+  "orderDetailsDescription": "Details of your order including items and shipping info.",
+  "size": "Size",
+  "color": "Color",
+  "showAll": "Show all",
+  "showLess": "Show less"
 }

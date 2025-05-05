@@ -1,16 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface OrderItem {
+export interface OrderItem {
   id: string;
   name: string;
   price: number;
   quantity: number;
   size?: string;
+  color?: string;       //  Hex or color code
+  colorName?: string;   //  Human-readable name
+  image?: string;       //  Product image URL
 }
 
-
-interface Order {
+export interface Order {
   id: string;
   date: string;
   items: OrderItem[];
@@ -19,6 +21,12 @@ interface Order {
     name: string;
     email: string;
     address: string;
+    city?: string;
+    country?: string;
+    region?: string;
+    postalCode?: string;
+    phone?: string;
+    paymentMethod?: string;
   };
 }
 

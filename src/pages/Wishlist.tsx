@@ -14,9 +14,14 @@ export default function Wishlist() {
   if (wishlistedProducts.length === 0)
     return (
       <div className="text-center py-20 text-gray-500">
+                <img
+          src="/images/empty-wishlist.png"
+          alt="Empty wishlist"
+          className="mx-auto mb-6 w-36 h-auto"
+        />
         <p className="text-xl mb-4">Your wishlist is empty.</p>
         <Link to="/products" className="text-theme underline hover:text-theme/80 transition">
-          Browse products
+          Browse Products
         </Link>
       </div>
     );

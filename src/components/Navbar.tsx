@@ -133,7 +133,7 @@ export default function Navbar() {
                     {t("wishlist")}
                   </button>
                   <button
-                    onClick={() => protectedNavigate("/orders")}
+                    onClick={() => protectedNavigate("/orderhistory")}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     {t("Orders")}
@@ -182,34 +182,36 @@ export default function Navbar() {
       </nav>
 
       {/* Bottom Category Navbar visible on all screen sizes */}
-      <div className="bg-white border-t border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center gap-6 flex-wrap">
-          <NavLink
-            to="/products?category=clothing"
-            className="text-sm text-gray-700 hover:text-theme font-medium"
-          >
-            {t("Clothing")}
-          </NavLink>
-          <NavLink
-            to="/products?category=accessories"
-            className="text-sm text-gray-700 hover:text-theme font-medium"
-          >
-            {t("Accessories")}
-          </NavLink>
-          <NavLink
-            to="/products?category=organic"
-            className="text-sm text-gray-700 hover:text-theme font-medium"
-          >
-            {t("Organic")}
-          </NavLink>
-          <NavLink
-            to="/products?category=dried"
-            className="text-sm text-gray-700 hover:text-theme font-medium"
-          >
-            {t("Dried")}
-          </NavLink>
+      {location.pathname === "/" && (
+        <div className="bg-white border-t border-gray-200 shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center gap-6 flex-wrap">
+            <NavLink
+              to="/products?category=clothing"
+              className="text-sm text-gray-700 hover:text-theme font-medium"
+            >
+              {t("Clothing")}
+            </NavLink>
+            <NavLink
+              to="/products?category=accessories"
+              className="text-sm text-gray-700 hover:text-theme font-medium"
+            >
+              {t("Accessories")}
+            </NavLink>
+            <NavLink
+              to="/products?category=organic"
+              className="text-sm text-gray-700 hover:text-theme font-medium"
+            >
+              {t("Organic")}
+            </NavLink>
+            <NavLink
+              to="/products?category=dried"
+              className="text-sm text-gray-700 hover:text-theme font-medium"
+            >
+              {t("Dried")}
+            </NavLink>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Bottom Sticky Mobile Nav */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_8px_-2px_rgba(0,0,0,0.1)] z-50">

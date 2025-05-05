@@ -257,12 +257,13 @@ const ProductDetails = () => {
               </div>
             </div>
           )}
-
+          
           <button
             onClick={handleAdd}
-            className="bg-[var(--primary-orange)] hover:bg-[var(--primary-amber)] text-white w-full px-6 py-3 mt-4 rounded transition"
+            className="bg-[var(--primary-orange)] hover:bg-[var(--primary-amber)] text-white w-full px-6 py-3 mt-4 rounded transition flex items-center justify-center gap-2"
           >
-            Add to cart 🛒
+            Add to cart
+            <img src="/images/cart-icon.png" alt="Cart" className="w-5 h-5" />
           </button>
         </div>
       </div>
