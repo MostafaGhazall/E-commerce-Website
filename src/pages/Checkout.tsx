@@ -151,7 +151,7 @@ const Checkout = () => {
                   )}
                 </div>
                 <span className="font-semibold text-lg">
-                  {(product.price * item.quantity).toFixed(2)} EGP
+                  EGP {(product.price * item.quantity).toFixed(2)}
                 </span>
               </li>
             );
@@ -160,7 +160,7 @@ const Checkout = () => {
 
         <div className="flex justify-between font-medium text-lg mt-6 border-t pt-4">
           <span>{t("Subtotal")}</span>
-          <span>{total.toFixed(2)} EGP</span>
+          <span>EGP {total.toFixed(2)}</span>
         </div>
 
         <div className="flex justify-between font-medium text-lg mt-2">
@@ -175,7 +175,7 @@ const Checkout = () => {
 
         <div className="flex justify-between font-bold text-xl mt-4">
           <span>{t("Total")}</span>
-          <span>{total.toFixed(2)} EGP</span>
+          <span>EGP {total.toFixed(2)}</span>
         </div>
 
         <div className="mt-4 text-sm text-gray-500">

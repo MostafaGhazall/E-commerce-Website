@@ -69,6 +69,69 @@ const demoProducts: Product[] = [
     ],
     category: "accessories",
   },
+  {
+    id: "3",
+    name: "Modern Sofa Set",
+    price: 5200,
+    description:
+      "Spacious and stylish L-shaped sofa perfect for relaxing or entertaining guests in your living room.",
+    images: ["/assets/sofa1.jpg", "/assets/sofa2.jpg", "/assets/sofa3.jpg"],
+    stock: 5,
+    rating: 4.5,
+    reviews: [
+      {
+        comment: "Comfortable and looks amazing in my living room!",
+        name: "Lina",
+        rating: 5,
+        date: "2025-04-20",
+      },
+    ],
+    category: "furniture",
+    colors: [
+      {
+        name: "Beige",
+        value: "#f5f5dc",
+        images: ["/assets/sofa1.jpg", "/assets/sofa2.jpg", "/assets/sofa3.jpg"],
+      },
+    ],
+  },
+  {
+    id: "4",
+    name: "Galaxy Nova X5 Smartphone",
+    price: 8900,
+    description:
+      "Powerful smartphone with cutting-edge camera and long battery life—your perfect tech companion.",
+    images: ["/assets/phone1.jpg", "/assets/phone2.jpg"],
+    stock: 15,
+    rating: 4.8,
+    reviews: [
+      {
+        comment: "Best phone I’ve owned—great camera and smooth performance.",
+        name: "Omar",
+        rating: 5,
+        date: "2025-03-11",
+      },
+      {
+        comment: "Battery lasts two full days, very happy!",
+        name: "Noura",
+        rating: 4,
+        date: "2025-03-19",
+      },
+    ],
+    category: "electronics",
+    colors: [
+      {
+        name: "Midnight Black",
+        value: "#000000",
+        images: ["/assets/phone1.jpg"],
+      },
+      {
+        name: "Ocean Blue",
+        value: "#0077be",
+        images: ["/assets/phone2.jpg"],
+      },
+    ],
+  },
 ];
 
 export const seedProducts = async () => {

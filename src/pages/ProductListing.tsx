@@ -37,7 +37,7 @@ const ProductListing = () => {
     sortProducts(sort);
   }, [searchParams]);
 
-  const categories = ["clothing", "accessories"];
+  const categories = ["clothing", "accessories", "electronics", "furniture"];
 
   const handleCategoryClick = (category: string) => {
     const query = new URLSearchParams(searchParams);

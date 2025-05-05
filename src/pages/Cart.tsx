@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import CartItem from "../components/CartItem";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, clearCart } = useCartStore();
@@ -80,82 +81,19 @@ const Cart = () => {
           if (!product) return null;
 
           return (
-            <div
-              key={`${item.id}-${item.size || "default"}-${
-                item.color || "default"
-              }`}
-              className="p-4 rounded-md border shadow-sm bg-gray-50 flex flex-col sm:flex-row justify-between gap-4"
-            >
-              <div className="flex items-center gap-4">
-                <img
-                  src={item.image}
-                  onError={(e) =>
-                    (e.currentTarget.src = "/images/default-product.png")
-                  }
-                  alt={item.name}
-                  className="w-20 h-20 object-contain rounded"
-                />
-                <div>
-                  <h3 className="font-semibold">{product.name}</h3>
-                  <p className="text-sm text-gray-500">
-                    ${product.price.toFixed(2)}
-                  </p>
-                  {item.size && (
-                    <p className="text-xs text-gray-500 mt-1">
-                      {t("Size")}: {item.size}
-                    </p>
-                  )}
-                  {item.color && (
-                    <p className="text-xs text-gray-500 flex items-center gap-1">
-                      {t("Color")}:
-                      <span
-                        className="inline-block w-4 h-4 rounded-full border"
-                        style={{ backgroundColor: item.color }}
-                        title={item.colorName}
-                      ></span>
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 self-end sm:self-center">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() =>
-                      handleQuantityChange(
-                        item.id,
-                        item.quantity - 1,
-                        item.size,
-                        item.color
-                      )
-                    }
-                    className="px-2 py-1 border rounded text-sm cursor-pointer"
-                  >
-                    -
-                  </button>
-                  <span className="px-2 w-8 text-center">{item.quantity}</span>
-                  <button
-                    onClick={() =>
-                      handleQuantityChange(
-                        item.id,
-                        item.quantity + 1,
-                        item.size,
-                        item.color
-                      )
-                    }
-                    className="px-2 py-1 border rounded text-sm cursor-pointer"
-                  >
-                    +
-                  </button>
-                </div>
-                <button
-                  onClick={() => handleRemove(item.id, item.size, item.color)}
-                  className="text-red-500 hover:underline cursor-pointer text-sm"
-                >
-                  {t("Remove")}
-                </button>
-              </div>
-            </div>
+            <CartItem
+              key={`${item.id}-${item.size || "default"}-${item.color || "default"}`}
+              id={item.id}
+              name={product.name}
+              image={item.image}
+              price={product.price}
+              quantity={item.quantity}
+              size={item.size}
+              color={item.color}
+              onIncrease={() => handleQuantityChange(item.id, item.quantity + 1, item.size, item.color)}
+              onDecrease={() => handleQuantityChange(item.id, item.quantity - 1, item.size, item.color)}
+              onRemove={() => handleRemove(item.id, item.size, item.color)}
+            />
           );
         })}
       </div>
@@ -168,7 +106,7 @@ const Cart = () => {
           {t("Clear Cart")}
         </button>
         <div className="text-xl font-bold">
-          {t("Total")}: ${total.toFixed(2)}
+          {t("Total")}: EGP {total.toFixed(2)}
         </div>
       </div>
 

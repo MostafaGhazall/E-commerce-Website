@@ -226,16 +226,16 @@ export default function Navbar() {
               {t("Accessories")}
             </NavLink>
             <NavLink
-              to="/products?category=organic"
+              to="/products?category=electronics"
               className="text-sm text-gray-700 hover:text-theme font-medium"
             >
-              {t("Organic")}
+              {t("Electronics")}
             </NavLink>
             <NavLink
-              to="/products?category=dried"
+              to="/products?category=furniture"
               className="text-sm text-gray-700 hover:text-theme font-medium"
             >
-              {t("Dried")}
+              {t("Furniture")}
             </NavLink>
           </div>
         </div>
