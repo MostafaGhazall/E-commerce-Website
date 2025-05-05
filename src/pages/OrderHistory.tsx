@@ -52,10 +52,7 @@ export default function OrderHistory() {
                       ? order.items
                       : order.items.slice(0, 1)
                     ).map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex gap-4 items-start"
-                      >
+                      <div key={item.id} className="flex gap-4 items-start">
                         <img
                           src={item.image || "/fallback.png"}
                           alt={item.name}
@@ -112,10 +109,10 @@ export default function OrderHistory() {
                     <p className="text-xs text-gray-500">
                       Your order will arrive within 3–5 business days.
                     </p>
-                    <div className="flex items-center justify-center mt-1">
-                      <div className="w-24 h-1 bg-[var(--primary-orange)]" />
-                      <div className="w-6 h-1 bg-gray-300" />
-                      <div className="w-6 h-1 bg-gray-300 rounded-r-full" />
+                    <div className="flex items-center justify-center mt-2">
+                      <div className="w-8 h-1 bg-[var(--primary-orange)] rounded-l-full" />
+                      <div className="w-12 h-1 bg-gray-300" />
+                      <div className="w-12 h-1 bg-gray-300 rounded-r-full" />
                     </div>
                   </div>
 

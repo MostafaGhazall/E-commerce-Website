@@ -172,7 +172,7 @@ const Cart = () => {
         </div>
       </div>
 
-      <div className="mt-6 text-right sm:static fixed bottom-0 left-0 right-0 bg-white sm:bg-transparent shadow sm:shadow-none p-4 sm:p-0">
+      <div className="relative mt-6 sm:static bottom-0 left-0 right-0 bg-white sm:bg-transparent sm:shadow-none p-4 sm:p-0 flex justify-center sm:justify-end">
         <Link
           to="/checkout"
           className="bg-[var(--primary-orange)] text-white px-6 py-2 rounded hover:bg-opacity-90 transition"

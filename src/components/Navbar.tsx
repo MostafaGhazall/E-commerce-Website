@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCartStore } from "../contexts/useCartStore";
 import { usePreferenceStore } from "../contexts/usePreferenceStore";
@@ -20,7 +20,32 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  const profileRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target as Node)
+      ) {
+        setProfileOpen(false);
+      }
+    };
+  
+    // Only add listener for medium and up screens
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+  
+    if (profileOpen && isDesktop) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      if (isDesktop) {
+        document.removeEventListener("mousedown", handleClickOutside);
+      }
+    };
+  }, [profileOpen]);
+  
   useEffect(() => {
     i18n.changeLanguage(language);
     localStorage.setItem("lang", language);
@@ -114,7 +139,10 @@ export default function Navbar() {
                 )}
               </button>
               {profileOpen && (
-                <div className="absolute right-0 mt-2 bg-white text-gray-800 shadow-md rounded-md py-2 w-48 z-10">
+                <div
+                  ref={profileRef}
+                  className="absolute right-0 mt-2 bg-white text-gray-800 shadow-md rounded-md py-2 w-48 z-10"
+                >
                   {user && (
                     <p className="px-4 py-2 text-sm text-gray-600 border-b">
                       {user.email}
@@ -290,7 +318,7 @@ export default function Navbar() {
               </button>
               <button
                 onClick={() => {
-                  protectedNavigate("/orders");
+                  protectedNavigate("/orderhistory");
                   setProfileOpen(false);
                 }}
                 className="w-full text-left px-4 pt-3 pb-6 hover:bg-[var(--primary-orange)] hover:text-white"
