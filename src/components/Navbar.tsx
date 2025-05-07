@@ -69,12 +69,24 @@ export default function Navbar() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (search.trim()) {
-      navigate(`/products?search=${encodeURIComponent(search)}`);
-      setSearch("");
+    const trimmed = search.trim().toLowerCase();
+    if (!trimmed) return;
+  
+    const knownCategories = ["clothing", "accessories", "electronics", "furniture"];
+  
+    const matchedCategory = knownCategories.find((cat) =>
+      cat.toLowerCase().includes(trimmed)
+    );
+  
+    if (matchedCategory) {
+      navigate(`/products?category=${encodeURIComponent(matchedCategory)}`);
+    } else {
+      navigate(`/products?search=${encodeURIComponent(trimmed)}`);
     }
+  
+    setSearch("");
   };
-
+    
   return (
     <>
       {/* Top Navbar */}

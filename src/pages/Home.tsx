@@ -57,17 +57,17 @@ const Home = () => {
         {/* Text & Button overlay */}
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center pointer-events-none">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">
-            {t("welcome")}
+            {t("homePage.welcome")}
           </h1>
           <p className="max-w-xl mx-auto text-lg mb-6 drop-shadow">
-            {t("intro")}
+            {t("homePage.intro")}
           </p>
           <div className="pointer-events-auto">
             <Link
               to="/products"
               className="inline-block bg-[var(--primary-sun)] text-gray-900 font-semibold px-6 py-3 rounded hover:bg-yellow-300 transition"
             >
-              {t("shopNow")}
+              {t("homePage.shopNow")}
             </Link>
           </div>
         </div>
@@ -111,9 +111,9 @@ const Home = () => {
 
       {/* Featured Products */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <h2 className="text-2xl font-bold mb-6 text-center">{t("featured")}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t("homePage.featured")}</h2>
         {featured.length === 0 ? (
-          <p className="text-center text-gray-500">{t("noProducts")}</p>
+          <p className="text-center text-gray-500">{t("homePage.noProducts")}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {featured.map((product) => (
@@ -138,14 +138,14 @@ const Home = () => {
         {/* Content */}
         <div className="relative z-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t("cta.title")}
+            {t("homePage.ctaTitle")}
           </h2>
-          <p className="mb-6 text-white/80">{t("cta.desc")}</p>
+          <p className="mb-6 text-white/80">{t("homePage.ctaDesc")}</p>
           <Link
             to="/products"
             className="inline-block bg-white text-[var(--primary-orange)] font-medium px-6 py-3 rounded hover:bg-gray-100 transition"
           >
-            {t("cta.button")}
+            {t("homePage.ctaButton")}
           </Link>
         </div>
       </section>

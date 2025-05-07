@@ -4,24 +4,24 @@
   "wishlist": "Wishlist",
   "cart": "Cart",
   "checkout": "Checkout",
-  "welcome": "Welcome to MyShop",
-  "intro": "Discover quality products tailored for your lifestyle.",
-  "shopNow": "Shop Now",
-  "categories": {
-    "clothing": "Clothing",
-    "clothingDesc": "Timeless fashion essentials",
-    "accessories": "Accessories",
-    "accessoriesDesc": "Bags, bottles, and more",
-    "furniture": "Furniture",
-    "furnitureDesc": "Discover Timeless Comfort and Style"
+
+  "homePage": {
+    "welcome": "Welcome to MyShop",
+    "intro": "Discover quality products tailored for your lifestyle.",
+    "shopNow": "Shop Now",
+    "featured": "Featured Products",
+    "noProducts": "No products yet...",
+    "flashSaleTitle": "Super Flash Sale",
+    "flashSaleDesc": "Sunday to Thursday at 2PM",
+    "wheelTitle": "Wheel Of Fortunes",
+    "wheelDesc": "Spin and Win Daily Rewards",
+    "discountTitle": "Extra Discounts",
+    "discountDesc": "Exclusive Vouchers & Checkout Deal",
+    "ctaTitle": "Don't miss out",
+    "ctaDesc": "Great deals and handpicked collections await.",
+    "ctaButton": "Browse All Products"
   },
-  "featured": "Featured Products",
-  "noProducts": "No products yet...",
-  "cta": {
-    "title": "Don't miss out",
-    "desc": "Great deals and handpicked collections await.",
-    "button": "Browse All Products"
-  },
+
   "fullName": "Full Name",
   "email": "Email",
   "shippingAddress": "Shipping Address",
@@ -32,6 +32,7 @@
   "quantity": "Qty",
   "fillAllFields": "Please fill in all fields",
   "orderSuccess": "Order placed successfully!",
+
   "description": "Modern shopping made simple.",
   "quickLinks": "Quick Links",
   "customer": "Customer",
@@ -43,6 +44,7 @@
   "twitter": "Twitter",
   "facebook": "Facebook",
   "rights": "All rights reserved.",
+
   "orderID": "Order ID",
   "viewDetails": "View Details",
   "close": "Close",
