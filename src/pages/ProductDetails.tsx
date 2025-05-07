@@ -108,7 +108,7 @@ const ProductDetails = () => {
 
     toast.success(`${product.name} added to cart!`);
   };
-
+  
   const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
     const hasHalf = rating - fullStars >= 0.5;
@@ -119,7 +119,7 @@ const ProductDetails = () => {
         {[...Array(fullStars)].map((_, i) => (
           <Star
             key={`full-${i}`}
-            className="w-5 h-5 text-yellow-500"
+            className="w-5 h-5 text-[var(--primary-sun)]"
             fill="currentColor"
             stroke="currentColor"
           />
@@ -127,7 +127,7 @@ const ProductDetails = () => {
         {hasHalf && (
           <StarHalf
             key="half"
-            className="w-5 h-5 text-yellow-500"
+            className="w-5 h-5 text-[var(--primary-sun)]"
             fill="currentColor"
             stroke="currentColor"
           />
@@ -135,7 +135,7 @@ const ProductDetails = () => {
         {[...Array(emptyStars)].map((_, i) => (
           <StarEmpty
             key={`empty-${i}`}
-            className="w-5 h-5 text-yellow-500"
+            className="w-5 h-5 text-[var(--primary-sun)]"
             fill="none"
             stroke="currentColor"
           />
@@ -260,10 +260,10 @@ const ProductDetails = () => {
           
           <button
             onClick={handleAdd}
-            className="bg-[var(--primary-orange)] hover:bg-[var(--primary-amber)] text-white w-full px-6 py-3 mt-4 rounded transition flex items-center justify-center gap-2"
+            className="bg-[var(--primary-sun)] hover:bg-yellow-300 text-black w-full px-6 py-3 mt-4 rounded transition flex items-center justify-center gap-2 cursor-pointer"
           >
             Add to cart
-            <img src="/images/cart-icon.png" alt="Cart" className="w-5 h-5" />
+            <img src="/images/cart-icon2.png" alt="Cart" className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -290,7 +290,7 @@ const ProductDetails = () => {
                   <Star
                     key={i}
                     className={`w-4 h-4 ${
-                      i < r.rating ? "text-yellow-500" : "text-gray-300"
+                      i < r.rating ? "text-[var(--primary-sun)]" : "text-gray-300"
                     }`}
                     fill={i < r.rating ? "currentColor" : "none"}
                   />
@@ -320,7 +320,7 @@ const ProductDetails = () => {
                   <Star
                     className={`w-6 h-6 ${
                       star <= newReview.rating
-                        ? "text-yellow-500"
+                        ? "text-[var(--primary-sun)]"
                         : "text-gray-300"
                     }`}
                     fill={star <= newReview.rating ? "currentColor" : "none"}

@@ -5,6 +5,7 @@ import { usePreferenceStore } from './contexts/usePreferenceStore';
 import { useAuthStore } from './contexts/useAuthStore';
 import { seedProducts } from './services/seedProducts';
 import { useProductStore } from './contexts/useStore';
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from './pages/Home';
 import ProductListing from './pages/ProductListing';
@@ -45,6 +46,7 @@ const App = () => {
     <Router>
       <div className="bg-white min-h-screen flex flex-col text-gray-900">
         <Toaster position="top-right" />
+        <ScrollToTop />
         <Navbar />
         <div className="flex-grow">
           <Routes>

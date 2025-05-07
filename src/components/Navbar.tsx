@@ -121,7 +121,7 @@ export default function Navbar() {
           {/* Right Side */}
           <div className="hidden md:flex items-center space-x-6 relative">
             {/* Account */}
-            <div className="relative">
+            <div className="relative" ref={profileRef}>
               <button
                 onClick={toggleProfile}
                 className="flex items-center text-white gap-1 hover:cursor-pointer"
@@ -140,11 +140,10 @@ export default function Navbar() {
               </button>
               {profileOpen && (
                 <div
-                  ref={profileRef}
                   className="absolute right-0 mt-2 bg-white text-gray-800 shadow-md rounded-md py-2 w-48 z-10"
                 >
                   {user && (
-                    <p className="px-4 py-2 text-sm text-gray-600 border-b">
+                    <p className="px-4 py-2 text-sm text-gray-600 border-b border-[var(--primary-amber)]">
                       {user.email}
                     </p>
                   )}
@@ -168,7 +167,7 @@ export default function Navbar() {
                   </button>
                   <button
                     onClick={user ? handleLogout : () => navigate("/login")}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-100 border-t"
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 border-t border-[var(--primary-amber)]"
                   >
                     {user ? t("Logout") : t("Sign In")}
                   </button>
@@ -297,7 +296,7 @@ export default function Navbar() {
               <span className="text-sm text-gray-600">{user?.email}</span>
             </div>
 
-            <div className="mt-2 text-gray-800 font-medium">
+            <div className="mt-4 text-gray-800 font-medium border-t border-[var(--primary-amber)]">
               <button
                 onClick={() => {
                   protectedNavigate("/profile");
@@ -326,7 +325,7 @@ export default function Navbar() {
                 {t("Orders")}
               </button>
 
-              <div className="border-t my-1" />
+              <div className="border-t border-[var(--primary-amber)]" />
 
               <button
                 onClick={() => {

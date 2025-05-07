@@ -338,7 +338,7 @@ const Checkout = () => {
         <button
           type="submit"
           form="checkout-form"
-          className="bg-[var(--primary-orange)] text-white px-6 py-2 rounded hover:bg-opacity-90 w-full max-w-sm cursor-pointer"
+          className="bg-[var(--primary-sun)] text-black px-6 py-2 rounded hover:bg-yellow-300 w-full max-w-sm cursor-pointer"
         >
           {t("placeOrder")}
         </button>
