@@ -48,7 +48,7 @@
     "Please select a color.": "الرجاء اختيار اللون.",
     "added to cart!": "تمت إضافته إلى السلة!",
     "VARIATION_AVAILABLE": "المقاسات المتاحة",
-    "COLOR_OPTIONS": "الالوان المتاحة",
+    "COLOR_OPTIONS": "الألوان المتاحة",
     "Add to cart": "إضافة إلى السلة",
     "Product details": "تفاصيل المنتج",
     "Verified Customer Feedback": "ملاحظات العملاء المعتمدة",
@@ -58,8 +58,88 @@
     "Submit Review": "إرسال التقييم",
     "Anonymous": "مجهول",
     "verifiedRatings": "تقييمات العملاء",
-    "Add to wishlist": "اضف الى قائمة الرغبات",
-    "Remove from wishlist": "ازالة من قائمة الرغبات"
+    "Add to wishlist": "أضف إلى قائمة الرغبات",
+    "Remove from wishlist": "إزالة من قائمة الرغبات",
+    "Please sign in to add to cart": "يرجى تسجيل الدخول لإضافة المنتج إلى السلة",
+    "Please sign in to manage wishlist": "يرجى تسجيل الدخول لإدارة المفضلة",
+    "Please sign in to submit a review": "يرجى تسجيل الدخول لإرسال التقييم"
+  },
+
+  "contact": {
+    "title": "تواصل معنا",
+    "name": "اسمك",
+    "email": "بريدك الإلكتروني",
+    "message": "رسالتك",
+    "submit": "إرسال الرسالة",
+    "thankYou": "شكرًا! سنعود إليك قريبًا."
+  },
+
+  "footer": {
+    "description": "تسوق عصري بطريقة بسيطة.",
+    "quickLinks": "روابط سريعة",
+    "customer": "العميل",
+    "account": "الحساب",
+    "orderHistory": "تاريخ الطلبات",
+    "contact": "تواصل معنا",
+    "social": "تابعنا",
+    "instagram": "إنستغرام",
+    "twitter": "تويتر",
+    "facebook": "فيسبوك",
+    "rights": "جميع الحقوق محفوظة."
+  },
+
+  "productListing": {
+    "categories": "الفئات",
+    "clearFilters": "إزالة الفلاتر",
+    "selectCategory": "اختر فئة",
+    "sortBy": "ترتيب حسب",
+    "priceLow": "السعر: من الأقل إلى الأعلى",
+    "priceHigh": "السعر: من الأعلى إلى الأقل",
+    "alpha": "أبجديًا",
+    "noProducts": "لا توجد منتجات مطابقة.",
+    "tryAdjusting": "حاول تعديل الفلاتر أو استكشاف فئات أخرى.",
+    "resetFilters": "إعادة تعيين الفلاتر"
+  },
+
+  "login": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "submit": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب؟",
+    "registerLink": "سجل هنا",
+    "fillFields": "يرجى ملء كلا الحقلين",
+    "invalid": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "success": "مرحبًا بعودتك!"
+  },
+
+  "register": {
+    "title": "إنشاء حساب",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "agreeTerms": "أوافق على",
+    "terms": "الشروط والأحكام",
+    "submit": "تسجيل",
+    "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+    "loginLink": "تسجيل الدخول",
+    "strength": "القوة",
+    "strengthWeak": "ضعيفة",
+    "strengthMedium": "متوسطة",
+    "strengthStrong": "قوية",
+    "errors": {
+      "fillAll": "يرجى ملء جميع الحقول",
+      "invalidEmail": "يرجى إدخال بريد إلكتروني صالح",
+      "shortPassword": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "noMatch": "كلمتا المرور غير متطابقتين",
+      "terms": "يجب الموافقة على الشروط والأحكام",
+      "exists": "البريد الإلكتروني مستخدم بالفعل، حاول تسجيل الدخول",
+      "success": "تم إنشاء الحساب بنجاح!"
+    }
   },
 
   "fullName": "الاسم الكامل",
@@ -73,18 +153,6 @@
   "fillAllFields": "يرجى ملء جميع الحقول",
   "orderSuccess": "تم تقديم الطلب بنجاح!",
 
-  "description": "تسوق عصري بطريقة بسيطة.",
-  "quickLinks": "روابط سريعة",
-  "customer": "العميل",
-  "account": "الحساب",
-  "orderHistory": "تاريخ الطلبات",
-  "contact": "تواصل معنا",
-  "social": "تابعنا",
-  "instagram": "إنستغرام",
-  "twitter": "تويتر",
-  "facebook": "فيسبوك",
-  "rights": "جميع الحقوق محفوظة.",
-
   "orderID": "رقم الطلب",
   "viewDetails": "عرض التفاصيل",
   "close": "إغلاق",
@@ -95,7 +163,6 @@
   "Cancel": "إلغاء",
   "Save": "حفظ",
   "Save Address": "حفظ العنوان",
-  "Email": "البريد الإلكتروني",
   "Password": "كلمة المرور",
   "No Address": "لا يوجد عنوان",
   "Edit Address": "تعديل العنوان",

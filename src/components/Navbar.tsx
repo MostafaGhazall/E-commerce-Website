@@ -185,7 +185,13 @@ export default function Navbar() {
                     {t("navbar.Orders")}
                   </button>
                   <button
-                    onClick={user ? handleLogout : () => navigate("/login")}
+                    onClick={() => {
+                      if (user) handleLogout();
+                      else {
+                        setProfileOpen(false);
+                        navigate("/login");
+                      }
+                    }}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100 border-t border-[var(--primary-amber)]"
                   >
                     {user ? t("navbar.Logout") : t("navbar.Sign In")}
@@ -288,7 +294,7 @@ export default function Navbar() {
 
           {/* Cart */}
           <button
-            onClick={() => navigate("/cart")}
+            onClick={() => protectedNavigate("/cart")}
             className={`flex flex-col items-center relative ${
               isActive("/cart") ? "text-theme font-semibold" : "text-gray-500"
             }`}
@@ -348,9 +354,12 @@ export default function Navbar() {
 
               <button
                 onClick={() => {
-                  if (user) handleLogout();
-                  else navigate("/login");
-                  setProfileOpen(false);
+                  if (user) {
+                    handleLogout();
+                  } else {
+                    setProfileOpen(false);
+                    navigate("/login");
+                  }
                 }}
                 className="w-full text-left px-4 pt-3 pb-5 hover:bg-[var(--primary-orange)] hover:text-white"
               >

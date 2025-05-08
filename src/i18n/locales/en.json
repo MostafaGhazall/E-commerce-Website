@@ -59,7 +59,87 @@
     "Anonymous": "Anonymous",
     "verifiedRatings": "Verified Ratings",
     "Add to wishlist": "Add to wish list",
-    "Remove from wishlist": "Remove from wish list"
+    "Remove from wishlist": "Remove from wish list",
+    "Please sign in to add to cart": "Please sign in to add to cart",
+    "Please sign in to manage wishlist": "Please sign in to manage your wishlist",
+    "Please sign in to submit a review": "Please sign in to submit a review"
+  },
+
+  "footer": {
+    "description": "Modern shopping made simple.",
+    "quickLinks": "Quick Links",
+    "customer": "Customer",
+    "account": "Account",
+    "orderHistory": "Order History",
+    "contact": "Contact Us",
+    "social": "Social",
+    "instagram": "Instagram",
+    "twitter": "Twitter",
+    "facebook": "Facebook",
+    "rights": "All rights reserved."
+  },
+
+  "contact": {
+    "title": "Contact Us",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "submit": "Send Message",
+    "thankYou": "Thanks! We'll get back to you shortly."
+  },
+
+  "productListing": {
+    "categories": "Categories",
+    "clearFilters": "Clear Filters",
+    "selectCategory": "Select Category",
+    "sortBy": "Sort by",
+    "priceLow": "Price: Low to High",
+    "priceHigh": "Price: High to Low",
+    "alpha": "Alphabetical",
+    "noProducts": "No matching products found.",
+    "tryAdjusting": "Try adjusting your filters or explore other categories.",
+    "resetFilters": "Reset Filters"
+  },
+
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "emailPlaceholder": "Email",
+    "password": "Password",
+    "passwordPlaceholder": "Password",
+    "submit": "Sign In",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Register here",
+    "fillFields": "Please fill in both fields",
+    "invalid": "Invalid email or password",
+    "success": "Welcome back!"
+  },
+
+  "register": {
+    "title": "Register",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "agreeTerms": "I agree to the",
+    "terms": "terms and conditions",
+    "submit": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginLink": "Sign In",
+    "strength": "Strength",
+    "strengthWeak": "Weak",
+    "strengthMedium": "Medium",
+    "strengthStrong": "Strong",
+    "errors": {
+      "fillAll": "Please fill in all fields",
+      "invalidEmail": "Please enter a valid email",
+      "shortPassword": "Password must be at least 6 characters",
+      "noMatch": "Passwords do not match",
+      "terms": "You must agree to the terms and conditions",
+      "exists": "Email already exists. Try logging in.",
+      "success": "Account created!"
+    }
   },
 
   "fullName": "Full Name",
@@ -72,18 +152,6 @@
   "quantity": "Qty",
   "fillAllFields": "Please fill in all fields",
   "orderSuccess": "Order placed successfully!",
-
-  "description": "Modern shopping made simple.",
-  "quickLinks": "Quick Links",
-  "customer": "Customer",
-  "account": "Account",
-  "orderHistory": "Order History",
-  "contact": "Contact Us",
-  "social": "Social",
-  "instagram": "Instagram",
-  "twitter": "Twitter",
-  "facebook": "Facebook",
-  "rights": "All rights reserved.",
 
   "orderID": "Order ID",
   "viewDetails": "View Details",

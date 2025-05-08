@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useProductStore } from "../contexts/useStore";
 import ProductCard from "../components/ProductCard";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ProductListing = () => {
+  const { t } = useTranslation();
   const {
     filteredProducts,
     loadProducts,
@@ -87,13 +89,13 @@ const ProductListing = () => {
         <aside className="hidden md:block md:col-span-1">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-[var(--primary-orange)]">
-              Categories
+              {t("productListing.categories")}
             </h2>
             <button
               onClick={handleClearFilters}
               className="text-xs text-red-600 hover:underline"
             >
-              Clear Filters
+              {t("productListing.clearFilters")}
             </button>
           </div>
           <ul className="space-y-2">
@@ -107,7 +109,7 @@ const ProductListing = () => {
                       : "bg-gray-100 text-gray-800"
                   }`}
                 >
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  {t(`navbar.${cat.charAt(0).toUpperCase() + cat.slice(1)}`)}
                 </button>
               </li>
             ))}
@@ -116,7 +118,6 @@ const ProductListing = () => {
 
         {/* Product Grid and Sorting */}
         <main className="md:col-span-3 w-full">
-          {/* Responsive Dropdowns */}
           <div className="flex flex-col md:flex-row justify-between gap-4 mb-6">
             {/* Mobile Category Dropdown */}
             <div className="w-full md:hidden">
@@ -125,10 +126,10 @@ const ProductListing = () => {
                 onChange={handleMobileCategoryChange}
                 className="border border-gray-300 px-3 py-2 rounded shadow-sm w-full"
               >
-                <option value="">Select Category</option>
+                <option value="">{t("productListing.selectCategory")}</option>
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
-                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    {t(`navbar.${cat.charAt(0).toUpperCase() + cat.slice(1)}`)}
                   </option>
                 ))}
               </select>
@@ -141,10 +142,10 @@ const ProductListing = () => {
                 onChange={handleSortChange}
                 className="border border-gray-300 px-3 py-2 rounded shadow-sm w-full hover:cursor-pointer"
               >
-                <option value="">Sort by</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="alpha">Alphabetical</option>
+                <option value="">{t("productListing.sortBy")}</option>
+                <option value="price-low">{t("productListing.priceLow")}</option>
+                <option value="price-high">{t("productListing.priceHigh")}</option>
+                <option value="alpha">{t("productListing.alpha")}</option>
               </select>
             </div>
           </div>
@@ -156,13 +157,17 @@ const ProductListing = () => {
                 alt="No Products"
                 className="mx-auto w-40 h-40 mb-4"
               />
-              <h3 className="text-lg font-semibold mb-2">No matching products found.</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your filters or explore other categories.</p>
+              <h3 className="text-lg font-semibold mb-2">
+                {t("productListing.noProducts")}
+              </h3>
+              <p className="text-gray-600 mb-4">
+                {t("productListing.tryAdjusting")}
+              </p>
               <button
                 onClick={handleClearFilters}
                 className="bg-[var(--primary-orange)] text-white px-4 py-2 rounded hover:bg-opacity-90 hover:cursor-pointer"
               >
-                Reset Filters
+                {t("productListing.resetFilters")}
               </button>
             </div>
           ) : (
