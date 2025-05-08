@@ -27,13 +27,13 @@ const Cart = () => {
 
   const handleRemove = (id: string, size?: string, color?: string) => {
     removeFromCart(id, size, color);
-    toast.success(t("Item removed from cart"));
+    toast.success(t("cart.itemRemoved"));
   };
 
   const handleClearCart = () => {
     clearCart();
     setConfirmClear(false);
-    toast.success(t("Cart cleared"));
+    toast.success(t("cart.cleared"));
   };
 
   const handleQuantityChange = (
@@ -44,7 +44,7 @@ const Cart = () => {
   ) => {
     if (qty < 1) return;
     updateQuantity(id, qty, size, color);
-    toast.success(t("Quantity updated"));
+    toast.success(t("cart.updated"));
   };
 
   if (loading) {
@@ -63,9 +63,9 @@ const Cart = () => {
           alt="Empty cart"
           className="mx-auto mb-6 w-48 h-auto"
         />
-        <h2 className="text-xl font-bold mb-4">{t("Your Cart is Empty")}</h2>
+        <h2 className="text-xl font-bold mb-4">{t("cart.emptyTitle")}</h2>
         <Link to="/products" className="text-[var(--primary-orange)] underline">
-          {t("Go Shopping")}
+          {t("cart.shopNow")}
         </Link>
       </div>
     );
@@ -73,7 +73,7 @@ const Cart = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 text-gray-800 bg-white">
-      <h2 className="text-2xl font-bold mb-6">{t("Your Cart")}</h2>
+      <h2 className="text-2xl font-bold mb-6">{t("cart.title")}</h2>
 
       <div className="space-y-6">
         {cart.map((item) => {
@@ -90,6 +90,7 @@ const Cart = () => {
               quantity={item.quantity}
               size={item.size}
               color={item.color}
+              colorName={item.colorName}
               onIncrease={() => handleQuantityChange(item.id, item.quantity + 1, item.size, item.color)}
               onDecrease={() => handleQuantityChange(item.id, item.quantity - 1, item.size, item.color)}
               onRemove={() => handleRemove(item.id, item.size, item.color)}
@@ -103,10 +104,10 @@ const Cart = () => {
           onClick={() => setConfirmClear(true)}
           className="text-red-500 underline hover:text-red-700 cursor-pointer"
         >
-          {t("Clear Cart")}
+          {t("cart.clear")}
         </button>
         <div className="text-xl font-bold">
-          {t("Total")}: EGP {total.toFixed(2)}
+          {t("cart.total")}: EGP {total.toFixed(2)}
         </div>
       </div>
 
@@ -115,29 +116,29 @@ const Cart = () => {
           to="/checkout"
           className="bg-[var(--primary-sun)] text-black px-6 py-2 rounded hover:bg-yellow-300 transition"
         >
-          {t("Proceed to Checkout")}
+          {t("cart.checkout")}
         </Link>
       </div>
 
       {confirmClear && (
         <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-md text-center max-w-sm w-full">
-            <h3 className="text-lg font-semibold mb-3">{t("Are you sure?")}</h3>
+            <h3 className="text-lg font-semibold mb-3">{t("cart.confirmTitle")}</h3>
             <p className="text-sm text-gray-600 mb-6">
-              {t("This will remove all items from your cart.")}
+              {t("cart.confirmMessage")}
             </p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => setConfirmClear(false)}
                 className="px-4 py-2 border rounded text-gray-600 hover:bg-gray-100"
               >
-                {t("Cancel")}
+                {t("cart.cancel")}
               </button>
               <button
                 onClick={handleClearCart}
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
               >
-                {t("Confirm")}
+                {t("cart.confirm")}
               </button>
             </div>
           </div>

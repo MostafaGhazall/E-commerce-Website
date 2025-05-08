@@ -1,9 +1,12 @@
 {
   "home": "Home",
   "shop": "Shop",
-  "wishlist": "Wishlist",
-  "cart": "Cart",
-  "checkout": "Checkout",
+
+  "wishlist": {
+    "title": "Your Wishlist",
+    "emptyTitle": "Your wishlist is empty.",
+    "browse": "Browse Products"
+  },
 
   "navbar": {
     "Search MyShop...": "Search MyShop...",
@@ -76,7 +79,9 @@
     "instagram": "Instagram",
     "twitter": "Twitter",
     "facebook": "Facebook",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "cart": "Cart",
+    "wishlist": "Wishlist"
   },
 
   "contact": {
@@ -142,36 +147,104 @@
     }
   },
 
-  "fullName": "Full Name",
-  "email": "Email",
-  "shippingAddress": "Shipping Address",
-  "placeOrder": "Place Order",
-  "orderSummary": "Order Summary",
-  "total": "Total",
-  "emptyCart": "Your cart is empty",
-  "quantity": "Qty",
-  "fillAllFields": "Please fill in all fields",
-  "orderSuccess": "Order placed successfully!",
+  "cartItem": {
+    "price": "Price",
+    "size": "Size",
+    "color": "Color",
+    "remove": "Remove"
+  },
 
-  "orderID": "Order ID",
-  "viewDetails": "View Details",
-  "close": "Close",
-  "Account Overview": "Account Overview",
-  "Account Details": "Account Details",
-  "Address Book": "Address Book",
-  "Edit": "Edit",
-  "Cancel": "Cancel",
-  "Save": "Save",
-  "Save Address": "Save Address",
-  "Email": "Email",
-  "Password": "Password",
-  "No Address": "No Address",
-  "Edit Address": "Edit Address",
-  "Add Address": "Add Address",
-  "No Orders": "You have no orders yet.",
-  "orderDetailsDescription": "Details of your order including items and shipping info.",
-  "size": "Size",
-  "color": "Color",
-  "showAll": "Show all",
-  "showLess": "Show less"
+  "cart": {
+    "title": "Your Cart",
+    "emptyTitle": "Your Cart is Empty",
+    "shopNow": "Go Shopping",
+    "clear": "Clear Cart",
+    "checkout": "Proceed to Checkout",
+    "total": "Total",
+    "confirmTitle": "Are you sure?",
+    "confirmMessage": "This will remove all items from your cart.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "itemRemoved": "Item removed from cart",
+    "cleared": "Cart cleared",
+    "updated": "Quantity updated"
+  },
+
+  "checkout": {
+    "title": "Checkout",
+    "contactInfo": "Contact Information",
+    "shippingInfo": "Shipping Information",
+    "paymentMethod": "Payment Method",
+    "placeOrder": "Place Order",
+    "orderSummary": "Order Summary",
+    "quantity": "Quantity",
+    "size": "Size",
+    "color": "Color",
+    "subtotal": "Subtotal",
+    "deliveryCharge": "Delivery Charge",
+    "free": "FREE",
+    "tax": "Tax",
+    "included": "Included",
+    "total": "Total",
+    "arrivalTime": "Your order will arrive within 3–5 business days.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "shippingAddress": "Shipping Address",
+    "city": "City",
+    "region": "Region",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "phoneNumber": "Phone Number",
+    "useAsBilling": "Use as Billing Address",
+    "orderSuccess": "Order placed successfully!"
+  },
+  "errors": {
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email format",
+    "addressRequired": "Address is required",
+    "phoneRequired": "Phone is required",
+    "countryRequired": "Country is Required",
+    "cityRequired": "City is Required",
+    "regionRequired": "Region is Required",
+    "postalCodeRequired": "Postal Code is Required",
+    "phoneInvalid": "Invalid phone number",
+    "pleaseFillRequiredFields": "Please fill in all required fields"
+  },
+
+  "orders": {
+    "noOrders": "No Orders",
+    "orderHistory": "Order History",
+    "orderID": "Order ID",
+    "quantity": "Quantity",
+    "size": "Size",
+    "color": "Color",
+    "showAll": "Show all ({{count}} items)",
+    "showLess": "Show less",
+    "inTransit": "In Transit",
+    "arrivalEstimate": "Your order will arrive within 3–5 business days.",
+    "viewDetails": "View Details",
+    "orderDetailsDescription": "Details of your order including items and shipping info.",
+    "shippingAddress": "Shipping Address",
+    "orderSummary": "Order Summary",
+    "total": "Total",
+    "close": "Close"
+  },
+
+  "userProfile": {
+    "accountOverview": "Account Overview",
+    "accountDetails": "Account Details",
+    "addressBook": "Address Book",
+    "editAddress": "Edit Address",
+    "addAddress": "Add Address",
+    "city": "City",
+    "region": "Region",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "phone": "Phone",
+    "cancel": "Cancel",
+    "saveAddress": "Save Address",
+    "address":"Address",
+    "noAddress":"No Address"
+  }
 }

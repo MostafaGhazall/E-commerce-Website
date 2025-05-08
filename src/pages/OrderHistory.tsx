@@ -16,14 +16,14 @@ export default function OrderHistory() {
   if (orders.length === 0) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-xl font-bold mb-4">{t("No Orders")}</h2>
+        <h2 className="text-xl font-bold mb-4">{t("orders.noOrders")}</h2>
       </div>
     );
   }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-6">{t("orderHistory")}</h1>
+      <h1 className="text-2xl font-bold mb-6">{t("orders.orderHistory")}</h1>
 
       <div className="space-y-6">
         {[...orders]
@@ -41,8 +41,8 @@ export default function OrderHistory() {
                 className="rounded-lg p-4 shadow-sm bg-gray-50 border"
               >
                 <p className="text-xs text-gray-400 mb-4">
-                  {new Date(order.date).toLocaleDateString()} | {t("orderID")}:{" "}
-                  {orderId}
+                  {new Date(order.date).toLocaleDateString()} |{" "}
+                  {t("orders.orderID")}: {orderId}
                 </p>
 
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
@@ -63,13 +63,13 @@ export default function OrderHistory() {
                             {item.name}
                           </p>
                           <p className="text-gray-500 text-sm">
-                            {t("quantity")}: {item.quantity}
+                            {t("orders.quantity")}: {item.quantity}
                           </p>
                           <p className="text-gray-500 text-sm">
-                            {t("size")}: {item.size || "–"}
+                            {t("orders.size")}: {item.size || "–"}
                           </p>
                           <p className="text-gray-500 text-sm flex items-center gap-1">
-                            {t("color")}:
+                            {t("orders.color")}:
                             {item.color ? (
                               <span
                                 className="w-4 h-4 rounded-full border border-gray-300 inline-block mt-1"
@@ -94,9 +94,8 @@ export default function OrderHistory() {
                         className="text-sm text-[var(--primary-orange)] hover:underline transition mt-1 self-start cursor-pointer"
                       >
                         {expandedOrders[orderId]
-                          ? t("showLess") || "Show less"
-                          : t("showAll") ||
-                            `Show all (${order.items.length}) items`}
+                          ? t("orders.showLess")
+                          : t("orders.showAll", { count: order.items.length })}
                       </button>
                     )}
                   </div>
@@ -104,10 +103,10 @@ export default function OrderHistory() {
                   {/* CENTER: Order status */}
                   <div className="text-center">
                     <p className="text-sm font-semibold text-[var(--primary-orange)]">
-                      In Transit
+                      {t("orders.inTransit")}
                     </p>
                     <p className="text-xs text-gray-500">
-                      Your order will arrive within 3–5 business days.
+                      {t("orders.arrivalEstimate")}
                     </p>
                     <div className="flex items-center justify-center mt-2">
                       <div className="w-8 h-1 bg-[var(--primary-orange)] rounded-l-full" />
@@ -122,7 +121,7 @@ export default function OrderHistory() {
                     className="mt-2 px-4 py-1.5 border border-theme text-theme font-medium text-sm rounded transition-all duration-200 hover:bg-theme group cursor-pointer"
                   >
                     <span className="group-hover:text-white">
-                      {t("viewDetails")}
+                      {t("orders.viewDetails")}
                     </span>
                   </button>
                 </div>
@@ -143,13 +142,13 @@ export default function OrderHistory() {
             <div className="flex justify-between items-start">
               <div>
                 <Dialog.Title className="text-xl font-bold text-gray-800">
-                  {t("orderID")}:{" "}
+                  {t("orders.orderID")}:{" "}
                   <span className="text-sm font-medium text-gray-500">
                     {selectedOrder?.id}
                   </span>
                 </Dialog.Title>
                 <Dialog.Description className="text-sm text-gray-500 mt-1">
-                  {t("orderDetailsDescription") ||
+                  {t("orders.orderDetailsDescription") ||
                     "Details of your order including items and shipping info."}
                 </Dialog.Description>
               </div>
@@ -167,7 +166,7 @@ export default function OrderHistory() {
 
             <div>
               <h3 className="font-semibold text-gray-700 mb-1">
-                {t("shippingAddress")}
+                {t("orders.shippingAddress")}
               </h3>
               <div className="text-gray-600 leading-relaxed text-sm space-y-0.5">
                 <p>{selectedOrder?.shipping.name}</p>
@@ -178,7 +177,7 @@ export default function OrderHistory() {
 
             <div>
               <h3 className="font-semibold text-gray-700 mb-2">
-                {t("orderSummary")}
+                {t("orders.orderSummary")}
               </h3>
               <ul className="divide-y">
                 {selectedOrder?.items.map((item) => (
@@ -189,13 +188,13 @@ export default function OrderHistory() {
                     </div>
                     <div className="text-gray-500 text-sm space-y-0.5">
                       <p>
-                        {t("quantity")}: {item.quantity}
+                        {t("orders.quantity")}: {item.quantity}
                       </p>
                       <p>
-                        {t("size")}: {item.size || "–"}
+                        {t("orders.size")}: {item.size || "–"}
                       </p>
                       <div className="flex items-center gap-1">
-                        {t("color")}:
+                        {t("orders.color")}:
                         {item.color ? (
                           <span
                             className="w-4 h-4 rounded-full border border-gray-300 mt-1"
@@ -213,13 +212,13 @@ export default function OrderHistory() {
 
             <div className="flex justify-between items-center pt-4 border-t">
               <div className="text-gray-700 font-bold text-lg">
-                {t("total")}: {selectedOrder?.total.toFixed(2)} EGP
+                {t("orders.total")}: {selectedOrder?.total.toFixed(2)} EGP
               </div>
               <button
                 onClick={() => setSelectedOrder(null)}
                 className="text-sm text-theme hover:underline hover:text-theme/80 cursor-pointer"
               >
-                {t("close") || "Close"}
+                {t("orders.close") || "Close"}
               </button>
             </div>
           </Dialog.Panel>

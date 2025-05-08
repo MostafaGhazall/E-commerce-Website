@@ -62,23 +62,30 @@ const Checkout = () => {
     e.preventDefault();
 
     const errors: Record<string, string> = {};
-
-    if (!form.name) errors.name = t("Name is required");
+    if (!form.name) errors.name = t("errors.nameRequired");
     if (!form.email) {
-      errors.email = t("Email is required");
+      errors.email = t("errors.emailRequired");
     } else if (!isValidEmail(form.email)) {
-      errors.email = t("Invalid email format");
+      errors.email = t("errors.emailInvalid");
     }
 
-    if (!form.address) errors.address = t("Address is required");
+    if (!form.address) errors.address = t("errors.addressRequired");
+    if (!form.country) errors.country = t("errors.countryRequired");
+    if (!form.city) errors.city = t("errors.cityRequired");
+    if (!form.region) errors.region = t("errors.regionRequired");
+    if (!form.postalCode) errors.postalCode = t("errors.postalCodeRequired");
     if (!form.phone) {
-      errors.phone = t("Phone is required");
+      errors.phone = t("errors.phoneRequired");
     } else if (!isValidPhone(form.phone)) {
-      errors.phone = t("Invalid phone number");
+      errors.phone = t("errors.phoneInvalid");
     }
 
     setFormErrors(errors);
-
+    if (Object.keys(errors).length > 0) {
+      const firstErrorField = Object.keys(errors)[0];
+      document.querySelector(`input[name="${firstErrorField}"]`)?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
     if (Object.keys(errors).length > 0) return;
 
     const orderItems = cart.map((item) => {
@@ -89,12 +96,12 @@ const Checkout = () => {
         price: product?.price || 0,
         quantity: item.quantity,
         size: item.size,
-        color: item.color,               
-        colorName: item.colorName,       
+        color: item.color,
+        colorName: item.colorName,
         image: item.image || product?.images?.[0] || "/fallback.png",
       };
     });
-    
+
     const newOrder = {
       id: crypto.randomUUID(),
       date: new Date().toISOString(),
@@ -104,7 +111,7 @@ const Checkout = () => {
     };
 
     addOrder(newOrder);
-    toast.success(t("orderSuccess") || "Order placed successfully!");
+    toast.success(t("checkout.orderSuccess") || "Order placed successfully!");
     clearCart();
     navigate("/orderhistory");
   };
@@ -113,7 +120,7 @@ const Checkout = () => {
     <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10 text-gray-800 bg-white">
       {/* Order Summary - Appears First on Mobile */}
       <div className="order-1 lg:order-2 space-y-4 bg-gray-50 rounded-2xl px-6 py-6">
-        <h3 className="text-xl font-semibold">{t("Order Summary")}</h3>
+        <h3 className="text-xl font-semibold">{t("checkout.orderSummary")}</h3>
         <ul className="space-y-4">
           {cart.map((item) => {
             const product = getProduct(item.id);
@@ -135,14 +142,16 @@ const Checkout = () => {
                     {product.description}
                   </p>
                   <p className="text-sm text-gray-500">
-                    {t("Quantity")}: {item.quantity}
+                    {t("checkout.quantity")}: {item.quantity}
                   </p>
                   {item.size && (
-                    <p className="text-xs text-gray-500">Size: {item.size}</p>
+                    <p className="text-xs text-gray-500">
+                      {t("checkout.size")}: {item.size}
+                    </p>
                   )}
                   {item.colorName && (
                     <p className="text-xs text-gray-500 flex items-center gap-1">
-                      Color:
+                      {t("checkout.color")}:
                       <span
                         className="inline-block w-4 h-4 rounded-full border ml-1"
                         style={{ backgroundColor: item.color }}
@@ -159,45 +168,43 @@ const Checkout = () => {
         </ul>
 
         <div className="flex justify-between font-medium text-lg mt-6 border-t pt-4">
-          <span>{t("Subtotal")}</span>
+          <span>{t("checkout.subtotal")}</span>
           <span>EGP {total.toFixed(2)}</span>
         </div>
 
         <div className="flex justify-between font-medium text-lg mt-2">
-          <span>{t("Delivery Charge")}</span>
-          <span>{t("FREE")}</span>
+          <span>{t("checkout.deliveryCharge")}</span>
+          <span>{t("checkout.free")}</span>
         </div>
 
         <div className="flex justify-between font-medium text-lg mt-2">
-          <span>{t("Tax")}</span>
-          <span>{t("Included")}</span>
+          <span>{t("checkout.tax")}</span>
+          <span>{t("checkout.included")}</span>
         </div>
 
         <div className="flex justify-between font-bold text-xl mt-4">
-          <span>{t("Total")}</span>
+          <span>{t("checkout.total")}</span>
           <span>EGP {total.toFixed(2)}</span>
         </div>
 
         <div className="mt-4 text-sm text-gray-500">
-          <span className="italic">
-            {t("Your order will arrive within 3–5 business days.")}
-          </span>
+          <span className="italic">{t("checkout.arrivalTime")}</span>
         </div>
       </div>
 
       {/* Checkout Form - Appears Second on Mobile */}
       <div className="order-2 lg:order-1 space-y-6">
-        <h2 className="text-2xl font-bold mb-4">{t("checkout")}</h2>
+        <h2 className="text-2xl font-bold mb-4">{t("checkout.title")}</h2>
         <form id="checkout-form" onSubmit={handleSubmit} className="space-y-6">
           {/* Contact Information */}
           <div className="bg-gray-50 p-4 rounded-md space-y-4">
             <h3 className="text-xl font-semibold">
-              {t("Contact Information")}
+              {t("checkout.contactInfo")}
             </h3>
             <input
               name="name"
               type="text"
-              placeholder={t("fullName") || "Full Name"}
+              placeholder={t("checkout.fullName") || "Full Name"}
               value={form.name}
               onChange={handleChange}
               className={`w-full border px-4 py-2 rounded bg-white ${
@@ -211,7 +218,7 @@ const Checkout = () => {
             <input
               name="email"
               type="email"
-              placeholder={t("email") || "Email"}
+              placeholder={t("checkout.email") || "Email"}
               value={form.email}
               onChange={handleChange}
               className={`w-full border px-4 py-2 rounded bg-white ${
@@ -226,83 +233,132 @@ const Checkout = () => {
           {/* Shipping Information */}
           <div className="bg-gray-50 p-4 rounded-md space-y-4">
             <h3 className="text-xl font-semibold">
-              {t("Shipping Information")}
+              {t("checkout.shippingInfo")}
             </h3>
-            <input
-              name="address"
-              type="text"
-              placeholder={t("Shipping Address") || "Shipping Address"}
-              value={form.address}
-              onChange={handleChange}
-              className={`w-full border px-4 py-2 rounded bg-white ${
-                formErrors.address ? "border-red-500" : ""
-              }`}
-            />
-            {formErrors.address && (
-              <p className="text-red-500 text-sm">{formErrors.address}</p>
-            )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Address */}
+            <div>
               <input
-                name="city"
+                name="address"
                 type="text"
-                placeholder={t("City") || "City"}
-                value={form.city}
+                placeholder={
+                  t("checkout.shippingAddress") || "Shipping Address"
+                }
+                value={form.address}
                 onChange={handleChange}
-                className="w-full border px-4 py-2 rounded bg-white"
+                className={`w-full border px-4 py-2 rounded bg-white ${
+                  formErrors.address ? "border-red-500" : ""
+                }`}
               />
-
-              <input
-                name="region"
-                type="text"
-                placeholder={t("Region") || "Region"}
-                value={form.region}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded bg-white"
-              />
-
-              <input
-                name="postalCode"
-                type="text"
-                placeholder={t("Postal Code") || "Postal Code"}
-                value={form.postalCode}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded bg-white"
-              />
-
-              <input
-                name="country"
-                type="text"
-                placeholder={t("Country") || "Country"}
-                value={form.country}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded bg-white"
-              />
+              {formErrors.address && (
+                <p className="text-red-500 text-sm mt-1">
+                  {formErrors.address}
+                </p>
+              )}
             </div>
 
-            <input
-              name="phone"
-              type="text"
-              placeholder={t("Phone Number") || "Phone Number"}
-              value={form.phone}
-              onChange={handleChange}
-              className={`w-full border px-4 py-2 rounded bg-white ${
-                formErrors.phone ? "border-red-500" : ""
-              }`}
-            />
-            {formErrors.phone && (
-              <p className="text-red-500 text-sm">{formErrors.phone}</p>
-            )}
+            {/* Grid Inputs */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <input
+                  name="city"
+                  type="text"
+                  placeholder={t("checkout.city")}
+                  value={form.city}
+                  onChange={handleChange}
+                  className={`w-full border px-4 py-2 rounded bg-white ${
+                    formErrors.city ? "border-red-500" : ""
+                  }`}
+                />
+                {formErrors.city && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.city}</p>
+                )}
+              </div>
 
+              <div>
+                <input
+                  name="region"
+                  type="text"
+                  placeholder={t("checkout.region")}
+                  value={form.region}
+                  onChange={handleChange}
+                  className={`w-full border px-4 py-2 rounded bg-white ${
+                    formErrors.region ? "border-red-500" : ""
+                  }`}
+                />
+                {formErrors.region && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.region}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  name="postalCode"
+                  type="text"
+                  placeholder={t("checkout.postalCode")}
+                  value={form.postalCode}
+                  onChange={handleChange}
+                  className={`w-full border px-4 py-2 rounded bg-white ${
+                    formErrors.postalCode ? "border-red-500" : ""
+                  }`}
+                />
+                {formErrors.postalCode && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.postalCode}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  name="country"
+                  type="text"
+                  placeholder={t("checkout.country")}
+                  value={form.country}
+                  onChange={handleChange}
+                  className={`w-full border px-4 py-2 rounded bg-white ${
+                    formErrors.country ? "border-red-500" : ""
+                  }`}
+                />
+                {formErrors.country && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.country}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div>
+              <input
+                name="phone"
+                type="text"
+                placeholder={t("checkout.phoneNumber") || "Phone Number"}
+                value={form.phone}
+                onChange={handleChange}
+                className={`w-full border px-4 py-2 rounded bg-white ${
+                  formErrors.phone ? "border-red-500" : ""
+                }`}
+              />
+              {formErrors.phone && (
+                <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
+              )}
+            </div>
+
+            {/* Billing Checkbox */}
             <div className="flex items-center">
               <input type="checkbox" className="mr-2" />
-              <span>{t("Use as Billing Address")}</span>
+              <span>{t("checkout.useAsBilling")}</span>
             </div>
           </div>
 
           {/* Payment Method */}
           <div className="bg-gray-50 p-4 rounded-md space-y-4">
-            <h3 className="text-xl font-semibold">{t("Payment Method")}</h3>
+            <h3 className="text-xl font-semibold">
+              {t("checkout.paymentMethod")}
+            </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {["cash-on-delivery", "master-card", "paypal", "visa"].map(
                 (paymentOption) => (
@@ -340,7 +396,7 @@ const Checkout = () => {
           form="checkout-form"
           className="bg-[var(--primary-sun)] text-black px-6 py-2 rounded hover:bg-yellow-300 w-full max-w-sm cursor-pointer"
         >
-          {t("placeOrder")}
+          {t("checkout.placeOrder")}
         </button>
       </div>
     </div>

@@ -14,8 +14,8 @@ export default function Footer() {
   const quickLinks = [
     { label: t("home"), to: "/" },
     { label: t("shop"), to: "/products" },
-    { label: t("cart"), to: "/cart" },
-    { label: t("wishlist"), to: "/wishlist" },
+    { label: t("footer.cart"), to: "/cart" },
+    { label: t("footer.wishlist"), to: "/wishlist" },
   ];
 
   const customerLinks = [

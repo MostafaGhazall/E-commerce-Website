@@ -1,4 +1,5 @@
 import { CartItemProps } from "../types/CartItem";
+import { useTranslation } from "react-i18next";
 
 export default function CartItem({
   name,
@@ -12,30 +13,32 @@ export default function CartItem({
   onDecrease,
   onRemove,
 }: CartItemProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="p-4 rounded-md border shadow-sm bg-gray-50 flex flex-col sm:flex-row justify-between gap-4">
       {/* Left: Product image and info */}
       <div className="flex items-center gap-4">
         <img
           src={image}
-          onError={(e) =>
-            (e.currentTarget.src = "/images/default-product.png")
-          }
+          onError={(e) => (e.currentTarget.src = "/images/default-product.png")}
           alt={name}
           className="w-20 h-20 object-contain rounded"
         />
         <div>
           <h3 className="font-semibold">{name}</h3>
-          <p className="text-sm text-gray-500">EGP {price.toFixed(2)}</p>
+          <p className="text-sm text-gray-500">
+            {t("cartItem.price")}: EGP {price.toFixed(2)}
+          </p>
 
           {size && (
             <p className="text-xs text-gray-500 mt-1">
-              Size: {size}
+              {t("cartItem.size")}: {size}
             </p>
           )}
           {color && (
             <p className="text-xs text-gray-500 flex items-center gap-1">
-              Color:
+              {t("cartItem.color")}:
               <span
                 className="inline-block w-4 h-4 rounded-full border"
                 style={{ backgroundColor: color }}
@@ -67,7 +70,7 @@ export default function CartItem({
           onClick={onRemove}
           className="text-red-500 hover:underline cursor-pointer text-sm"
         >
-          Remove
+          {t("cartItem.remove")}
         </button>
       </div>
     </div>
