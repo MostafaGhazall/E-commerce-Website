@@ -19,7 +19,7 @@ export default function Footer() {
 
   const customerLinks = [
     { label: t('account'), to: '/profile' },
-    { label: t('orderHistory'), to: '/orders' },
+    { label: t('orderHistory'), to: '/orderhistory' },
     { label: t('contact'), to: '/contact' },
   ];
 

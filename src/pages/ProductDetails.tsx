@@ -5,16 +5,13 @@ import { useCartStore } from "../contexts/useCartStore";
 import { useWishlistStore } from "../contexts/useWishlistStore";
 import { addReviewToProduct } from "../services/indexedDB";
 import toast from "react-hot-toast";
-import {
-  Heart,
-  HeartOff,
-  Star,
-  StarHalf,
-  Star as StarEmpty,
-} from "lucide-react";
+import { Heart, HeartOff, Star, StarHalf, Star as StarEmpty } from "lucide-react";
+import { useUserStore } from "../contexts/useUserStore";
+import { useTranslation } from "react-i18next";
 import type { Product } from "../types/Product";
 
 const ProductDetails = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { products } = useProductStore();
   const product = products.find((p) => p.id === id);
@@ -22,6 +19,8 @@ const ProductDetails = () => {
   const isWishlisted = useWishlistStore((state) =>
     state.isWishlisted(product?.id || "")
   );
+  
+  const { firstName, lastName } = useUserStore(); // Get user profile from the store
 
   const [newReview, setNewReview] = useState({
     rating: 0,
@@ -31,18 +30,18 @@ const ProductDetails = () => {
   const handleReviewSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newReview.rating || !newReview.comment.trim()) {
-      toast.error("Please provide both a rating and comment.");
+      toast.error(t("productDetails.Please provide both a rating and comment.")); // Toast translation
       return;
     }
 
     if (!product) {
-      toast.error("Product not found.");
+      toast.error(t("productDetails.Product not found.")); // Toast translation
       return;
     }
 
     const review = {
       comment: newReview.comment,
-      name: "Anonymous", // Or get from user input if added
+      name: firstName && lastName ? `${firstName} ${lastName}` : t("productDetails.Anonymous"),
       rating: newReview.rating,
       date: new Date().toLocaleDateString(),
     };
@@ -51,9 +50,9 @@ const ProductDetails = () => {
       await addReviewToProduct(product.id, review); // Save to IndexedDB
       product.reviews.push(review); // Update UI
       setNewReview({ rating: 0, comment: "" });
-      toast.success("Review submitted!");
+      toast.success(t("productDetails.Review submitted!")); // Toast translation
     } catch {
-      toast.error("Failed to submit review.");
+      toast.error(t("productDetails.Failed to submit review.")); // Toast translation
     }
   };
 
@@ -68,7 +67,7 @@ const ProductDetails = () => {
   if (!product) {
     return (
       <div className="text-center text-[var(--primary-orange)] py-20">
-        Product not found.
+        {t("productDetails.Product not found.")}
       </div>
     );
   }
@@ -85,11 +84,11 @@ const ProductDetails = () => {
 
   const handleAdd = () => {
     if (product.sizes && product.sizes.length > 0 && !selectedSize) {
-      toast.error("Please select a size.");
+      toast.error(t("productDetails.Please select a size.")); // Toast translation
       return;
     }
     if (product.colors && product.colors.length > 0 && !selectedColor) {
-      toast.error("Please select a color.");
+      toast.error(t("productDetails.Please select a color.")); // Toast translation
       return;
     }
 
@@ -106,9 +105,9 @@ const ProductDetails = () => {
       colorName: selectedColor?.name,
     });
 
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`${product.name} ${t("productDetails.added to cart!")}`); // Toast translation
   };
-  
+
   const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
     const hasHalf = rating - fullStars >= 0.5;
@@ -182,7 +181,7 @@ const ProductDetails = () => {
             </h1>
             <button
               onClick={() => toggleWishlist(product.id)}
-              title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+              title={isWishlisted ? t("productDetails.Remove from wishlist") : t("productDetails.Add to wishlist")}
               className="text-gray-500 hover:text-red-500"
             >
               {isWishlisted ? (
@@ -207,14 +206,14 @@ const ProductDetails = () => {
               }
               className="text-sm text-blue-600 underline hover:text-blue-800 transition cursor-pointer"
             >
-              ({product.reviews.length} verified ratings)
+              ({product.reviews.length} {t("productDetails.verifiedRatings")})
             </button>
           </div>
 
           {/* Sizes */}
           {product.sizes && product.sizes.length > 0 && (
             <div className="mb-4">
-              <p className="font-semibold mb-2">VARIATION AVAILABLE</p>
+              <p className="font-semibold mb-2">{t("productDetails.VARIATION_AVAILABLE")}</p>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map((size) => (
                   <button
@@ -236,7 +235,7 @@ const ProductDetails = () => {
           {/* Colors */}
           {product.colors && product.colors.length > 0 && (
             <div className="mb-4">
-              <p className="font-semibold mb-2">COLOR OPTIONS</p>
+              <p className="font-semibold mb-2">{t("productDetails.COLOR_OPTIONS")}</p>
               <div className="flex gap-2">
                 {product.colors.map((color) => (
                   <button
@@ -257,12 +256,12 @@ const ProductDetails = () => {
               </div>
             </div>
           )}
-          
+
           <button
             onClick={handleAdd}
             className="bg-[var(--primary-sun)] hover:bg-yellow-300 text-black w-full px-6 py-3 mt-4 rounded transition flex items-center justify-center gap-2 cursor-pointer"
           >
-            Add to cart
+            {t("productDetails.Add to cart")}
             <img src="/images/cart-icon2.png" alt="Cart" className="w-5 h-5" />
           </button>
         </div>
@@ -270,7 +269,7 @@ const ProductDetails = () => {
 
       {/* Product description */}
       <div className="mt-12 border rounded p-4 bg-gray-50">
-        <h2 className="text-xl font-bold mb-2">Product details</h2>
+        <h2 className="text-xl font-bold mb-2">{t("productDetails.Product details")}</h2>
         <p className="text-gray-700">{product.description}</p>
       </div>
 
@@ -279,7 +278,7 @@ const ProductDetails = () => {
         ref={reviewsRef}
         className="mt-12 border rounded p-4 bg-gray-50 scroll-mt-20"
       >
-        <h2 className="text-xl font-bold mb-4">Verified Customer Feedback</h2>
+        <h2 className="text-xl font-bold mb-4">{t("productDetails.Verified Customer Feedback")}</h2>
 
         {/* Display Reviews */}
         <ul className="space-y-4">
@@ -298,7 +297,7 @@ const ProductDetails = () => {
               </div>
               <p className="text-gray-800 mb-1">{r.comment}</p>
               <p className="text-xs text-gray-500">
-                {r.date} by {r.name || "Anonymous"}
+                {r.date} by {r.name || t("productDetails.Anonymous")}
               </p>
             </li>
           ))}
@@ -307,9 +306,7 @@ const ProductDetails = () => {
         {/* Submit Review Form */}
         <form onSubmit={handleReviewSubmit} className="space-y-4 my-10">
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Your Rating
-            </label>
+            <label className="block text-sm font-medium mb-1">{t("productDetails.Your Rating")}</label>
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -330,9 +327,7 @@ const ProductDetails = () => {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Your Comment
-            </label>
+            <label className="block text-sm font-medium mb-1">{t("productDetails.Your Comment")}</label>
             <textarea
               value={newReview.comment}
               onChange={(e) =>
@@ -340,14 +335,14 @@ const ProductDetails = () => {
               }
               className="w-full border rounded px-3 py-2"
               rows={3}
-              placeholder="Share your thoughts about this product..."
+              placeholder={t("productDetails.Share your thoughts about this product...")}
             />
           </div>
           <button
             type="submit"
             className="bg-[var(--primary-orange)] text-white px-4 py-2 rounded hover:bg-[var(--primary-amber)]"
           >
-            Submit Review
+            {t("productDetails.Submit Review")}
           </button>
         </form>
       </div>

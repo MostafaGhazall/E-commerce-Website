@@ -31,21 +31,21 @@ export default function Navbar() {
         setProfileOpen(false);
       }
     };
-  
+
     // Only add listener for medium and up screens
     const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-  
+
     if (profileOpen && isDesktop) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-  
+
     return () => {
       if (isDesktop) {
         document.removeEventListener("mousedown", handleClickOutside);
       }
     };
   }, [profileOpen]);
-  
+
   useEffect(() => {
     i18n.changeLanguage(language);
     localStorage.setItem("lang", language);
@@ -71,22 +71,27 @@ export default function Navbar() {
     e.preventDefault();
     const trimmed = search.trim().toLowerCase();
     if (!trimmed) return;
-  
-    const knownCategories = ["clothing", "accessories", "electronics", "furniture"];
-  
+
+    const knownCategories = [
+      "clothing",
+      "accessories",
+      "electronics",
+      "furniture",
+    ];
+
     const matchedCategory = knownCategories.find((cat) =>
       cat.toLowerCase().includes(trimmed)
     );
-  
+
     if (matchedCategory) {
       navigate(`/products?category=${encodeURIComponent(matchedCategory)}`);
     } else {
       navigate(`/products?search=${encodeURIComponent(trimmed)}`);
     }
-  
+
     setSearch("");
   };
-    
+
   return (
     <>
       {/* Top Navbar */}
@@ -107,16 +112,20 @@ export default function Navbar() {
           >
             <input
               type="text"
-              placeholder={t("Search MyShop...")}
-              className="w-full px-4 py-2 rounded-l border border-white text-white focus:outline-none"
+              placeholder={t("navbar.Search MyShop...")}
+              className={`w-full px-4 py-2 border border-white text-white focus:outline-none ${
+                language === "ar" ? "rounded-r" : "rounded-l"
+              }`}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
               type="submit"
-              className="bg-white text-theme font-medium px-4 rounded-r border border-white hover:cursor-pointer"
+              className={`bg-white text-theme font-medium px-4 border border-white hover:cursor-pointer ${
+                language === "ar" ? "rounded-l" : "rounded-r"
+              }`}
             >
-              {t("Search")}
+              {t("navbar.Search")}
             </button>
           </form>
 
@@ -143,7 +152,7 @@ export default function Navbar() {
                   alt="Profile"
                   className="w-5 h-6"
                 />
-                <span>{t("Account")}</span>
+                <span>{t("navbar.Account")}</span>
                 {profileOpen ? (
                   <ChevronUp size={16} />
                 ) : (
@@ -151,9 +160,7 @@ export default function Navbar() {
                 )}
               </button>
               {profileOpen && (
-                <div
-                  className="absolute right-0 mt-2 bg-white text-gray-800 shadow-md rounded-md py-2 w-48 z-10"
-                >
+                <div className="absolute right-0 mt-2 bg-white text-gray-800 shadow-md rounded-md py-2 w-48 z-10">
                   {user && (
                     <p className="px-4 py-2 text-sm text-gray-600 border-b border-[var(--primary-amber)]">
                       {user.email}
@@ -163,25 +170,25 @@ export default function Navbar() {
                     onClick={() => protectedNavigate("/profile")}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
-                    {t("Profile")}
+                    {t("navbar.Profile")}
                   </button>
                   <button
                     onClick={() => protectedNavigate("/wishlist")}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
-                    {t("wishlist")}
+                    {t("navbar.wishlist")}
                   </button>
                   <button
                     onClick={() => protectedNavigate("/orderhistory")}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
-                    {t("Orders")}
+                    {t("navbar.Orders")}
                   </button>
                   <button
                     onClick={user ? handleLogout : () => navigate("/login")}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100 border-t border-[var(--primary-amber)]"
                   >
-                    {user ? t("Logout") : t("Sign In")}
+                    {user ? t("navbar.Logout") : t("navbar.Sign In")}
                   </button>
                 </div>
               )}
@@ -204,7 +211,7 @@ export default function Navbar() {
                   </span>
                 )}
               </div>
-              <span className="ml-2">{t("Cart")}</span>
+              <span className="ml-2">{t("navbar.Cart")}</span>
             </NavLink>
 
             {/* Language */}
@@ -228,25 +235,25 @@ export default function Navbar() {
               to="/products?category=clothing"
               className="text-sm text-gray-700 hover:text-theme font-medium"
             >
-              {t("Clothing")}
+              {t("navbar.Clothing")}
             </NavLink>
             <NavLink
               to="/products?category=accessories"
               className="text-sm text-gray-700 hover:text-theme font-medium"
             >
-              {t("Accessories")}
+              {t("navbar.Accessories")}
             </NavLink>
             <NavLink
               to="/products?category=electronics"
               className="text-sm text-gray-700 hover:text-theme font-medium"
             >
-              {t("Electronics")}
+              {t("navbar.Electronics")}
             </NavLink>
             <NavLink
               to="/products?category=furniture"
               className="text-sm text-gray-700 hover:text-theme font-medium"
             >
-              {t("Furniture")}
+              {t("navbar.Furniture")}
             </NavLink>
           </div>
         </div>
@@ -263,7 +270,7 @@ export default function Navbar() {
             }`}
           >
             <Home size={22} />
-            <span className="text-xs mt-1">{t("Home")}</span>
+            <span className="text-xs mt-1">{t("navbar.Home")}</span>
           </button>
 
           {/* Account */}
@@ -275,7 +282,7 @@ export default function Navbar() {
               }`}
             >
               <User size={22} />
-              <span className="text-xs mt-1">{t("Account")}</span>
+              <span className="text-xs mt-1">{t("navbar.Account")}</span>
             </button>
           </div>
 
@@ -292,7 +299,7 @@ export default function Navbar() {
                 {cartCount}
               </span>
             )}
-            <span className="text-xs mt-1">{t("Cart")}</span>
+            <span className="text-xs mt-1">{t("navbar.Cart")}</span>
           </button>
         </div>
       </div>
@@ -316,7 +323,7 @@ export default function Navbar() {
                 }}
                 className="w-full text-left px-4 py-3 hover:bg-[var(--primary-orange)] hover:text-white"
               >
-                {t("Profile")}
+                {t("navbar.Profile")}
               </button>
               <button
                 onClick={() => {
@@ -325,7 +332,7 @@ export default function Navbar() {
                 }}
                 className="w-full text-left px-4 py-3 hover:bg-[var(--primary-orange)] hover:text-white"
               >
-                {t("wishlist")}
+                {t("navbar.wishlist")}
               </button>
               <button
                 onClick={() => {
@@ -334,7 +341,7 @@ export default function Navbar() {
                 }}
                 className="w-full text-left px-4 pt-3 pb-6 hover:bg-[var(--primary-orange)] hover:text-white"
               >
-                {t("Orders")}
+                {t("navbar.Orders")}
               </button>
 
               <div className="border-t border-[var(--primary-amber)]" />
@@ -347,7 +354,7 @@ export default function Navbar() {
                 }}
                 className="w-full text-left px-4 pt-3 pb-5 hover:bg-[var(--primary-orange)] hover:text-white"
               >
-                {user ? t("Logout") : t("Sign In")}
+                {user ? t("navbar.Logout") : t("navbar.Sign In")}
               </button>
             </div>
           </div>

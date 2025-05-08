@@ -5,6 +5,23 @@
   "cart": "Cart",
   "checkout": "Checkout",
 
+  "navbar": {
+    "Search MyShop...": "Search MyShop...",
+    "Search": "Search",
+    "Profile": "Profile",
+    "Orders": "Orders",
+    "Logout": "Logout",
+    "Sign In": "Sign In",
+    "Account": "Account",
+    "wishlist": "Wishlist",
+    "Cart": "Cart",
+    "Home": "Home",
+    "Clothing": "Clothing",
+    "Accessories": "Accessories",
+    "Electronics": "Electronics",
+    "Furniture": "Furniture"
+  },
+
   "homePage": {
     "welcome": "Welcome to MyShop",
     "intro": "Discover quality products tailored for your lifestyle.",
@@ -20,6 +37,29 @@
     "ctaTitle": "Don't miss out",
     "ctaDesc": "Great deals and handpicked collections await.",
     "ctaButton": "Browse All Products"
+  },
+
+  "productDetails": {
+    "Please provide both a rating and comment.": "Please provide both a rating and comment.",
+    "Product not found.": "Product not found.",
+    "Review submitted!": "Review submitted!",
+    "Failed to submit review.": "Failed to submit review.",
+    "Please select a size.": "Please select a size.",
+    "Please select a color.": "Please select a color.",
+    "added to cart!": "added to cart!",
+    "VARIATION_AVAILABLE": "VARIATION AVAILABLE",
+    "COLOR_OPTIONS": "COLOR OPTIONS",
+    "Add to cart": "Add to cart",
+    "Product details": "Product details",
+    "Verified Customer Feedback": "Verified Customer Feedback",
+    "Your Rating": "Your Rating",
+    "Your Comment": "Your Comment",
+    "Share your thoughts about this product...": "Share your thoughts about this product...",
+    "Submit Review": "Submit Review",
+    "Anonymous": "Anonymous",
+    "verifiedRatings": "Verified Ratings",
+    "Add to wishlist": "Add to wish list",
+    "Remove from wishlist": "Remove from wish list"
   },
 
   "fullName": "Full Name",

@@ -74,21 +74,22 @@ const Home = () => {
       </section>
 
       {/* Deals & Sale */}
+      {/* Deals & Sale */}
       <section className="max-w-7xl mx-auto pt-16 px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
         {[
           {
-            title: "Super Flash Sale",
-            desc: "Sunday to Thursday at 2PM",
+            title: t("homePage.flashSaleTitle"),
+            desc: t("homePage.flashSaleDesc"),
             image: "/images/flash-sale2.png",
           },
           {
-            title: "Wheel Of Fortunes",
-            desc: "Spin and Win Daily Rewards",
+            title: t("homePage.wheelTitle"),
+            desc: t("homePage.wheelDesc"),
             image: "/images/wheel.png",
           },
           {
-            title: "Extra Discounts",
-            desc: "Exclusive Vouchers & Checkout Deal",
+            title: t("homePage.discountTitle"),
+            desc: t("homePage.discountDesc"),
             image: "/images/discount-ticket.png",
           },
         ].map((cat, i) => (
@@ -111,9 +112,13 @@ const Home = () => {
 
       {/* Featured Products */}
       <section className="max-w-7xl mx-auto px-4 py-16">
-        <h2 className="text-2xl font-bold mb-6 text-center">{t("homePage.featured")}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          {t("homePage.featured")}
+        </h2>
         {featured.length === 0 ? (
-          <p className="text-center text-gray-500">{t("homePage.noProducts")}</p>
+          <p className="text-center text-gray-500">
+            {t("homePage.noProducts")}
+          </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {featured.map((product) => (
