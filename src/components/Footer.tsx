@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../contexts/useAuthStore";
-// import { Instagram, Twitter, Facebook } from "lucide-react";
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
@@ -24,12 +23,6 @@ export default function Footer() {
     { label: t("footer.contact"), to: "/contact" },
   ];
 
-  // const socialLinks = [
-  //   { icon: Instagram, label: t("instagram"), href: "#" },
-  //   { icon: Twitter, label: t("twitter"), href: "#" },
-  //   { icon: Facebook, label: t("facebook"), href: "#" },
-  // ];
-
   return (
     <footer className="bg-gray-100 text-gray-700" dir={isRTL ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -46,7 +39,7 @@ export default function Footer() {
             {quickLinks.map((link) => (
               <li key={link.to}>
                 <Link
-                  to={canAccess(link.to) ? link.to : "/Login"}
+                  to={canAccess(link.to) ? link.to : "/login"}
                   className="hover:text-[var(--primary-orange)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-[var(--primary-orange)]"
                 >
                   {link.label}
@@ -63,7 +56,7 @@ export default function Footer() {
             {customerLinks.map((link) => (
               <li key={link.to}>
                 <Link
-                  to={canAccess(link.to) ? link.to : "/Login"}
+                  to={canAccess(link.to) ? link.to : "/login"}
                   className="hover:text-[var(--primary-orange)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-[var(--primary-orange)]"
                 >
                   {link.label}
@@ -73,22 +66,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Social Section (Optional) */}
+        {/* Optional Social Section */}
         {/* <div>
-          <h3 className="font-medium mb-2">{t("social")}</h3>
+          <h3 className="font-medium mb-2">{t("footer.social")}</h3>
           <ul className="space-y-2 text-sm">
-            {socialLinks.map(({ icon: Icon, label, href }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-[var(--primary-orange)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 ring-[var(--primary-orange)]"
-                >
-                  <Icon size={18} /> {label}
-                </a>
-              </li>
-            ))}
+            <li><a href="#" className="hover:text-[var(--primary-orange)]">Instagram</a></li>
+            <li><a href="#" className="hover:text-[var(--primary-orange)]">Twitter</a></li>
+            <li><a href="#" className="hover:text-[var(--primary-orange)]">Facebook</a></li>
           </ul>
         </div> */}
       </div>
