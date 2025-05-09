@@ -165,7 +165,7 @@ const ProductListing = () => {
               </p>
               <button
                 onClick={handleClearFilters}
-                className="bg-[var(--primary-orange)] text-white px-4 py-2 rounded hover:bg-opacity-90 hover:cursor-pointer"
+                className="bg-[var(--primary-sun)] text-black px-4 py-2 rounded hover:bg-yellow-300 hover:cursor-pointer"
               >
                 {t("productListing.resetFilters")}
               </button>

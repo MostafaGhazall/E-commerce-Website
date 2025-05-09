@@ -93,7 +93,7 @@ export default function Register() {
           onSubmit={handleRegister}
           className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg"
         >
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          <h2 className="text-3xl font-bold text-center text-[var(--primary-orange)] mb-8">
             {t("register.title")}
           </h2>
 
@@ -183,7 +183,7 @@ export default function Register() {
             />
             <label className="text-sm text-gray-700">
               {t("register.agreeTerms")}{" "}
-              <span className="text-blue-600 cursor-pointer">
+              <span className="text-[var(--primary-amber)] cursor-pointer">
                 {t("register.terms")}
               </span>
             </label>
@@ -192,10 +192,10 @@ export default function Register() {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-3 rounded-lg text-white ${
+            className={`w-full py-3 rounded-lg text-black ${
               isLoading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
+                : "bg-[var(--primary-sun)] hover:bg-yellow-300 cursor-pointer"
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           >
             {isLoading ? t("register.registering") : t("register.submit")}
@@ -203,7 +203,7 @@ export default function Register() {
 
           <p className="mt-4 text-sm text-center text-gray-600">
             {t("register.alreadyHaveAccount")}{" "}
-            <Link to="/login" className="text-blue-600 hover:underline">
+            <Link to="/login" className="text-[var(--primary-amber)] hover:underline">
               {t("register.loginLink")}
             </Link>
           </p>

@@ -36,7 +36,7 @@ const Home = () => {
             dots={false}
             speed={800}
             pauseOnHover={false}
-            className="absolute inset-0 z-0 border"
+            className="absolute inset-0 z-0"
           >
             {ads.map((src, i) => (
               <div

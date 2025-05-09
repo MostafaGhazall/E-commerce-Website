@@ -16,7 +16,12 @@ export default function OrderHistory() {
   if (orders.length === 0) {
     return (
       <div className="text-center py-20">
-        <h2 className="text-xl font-bold mb-4">{t("orders.noOrders")}</h2>
+        <img
+          src="/images/no-order.png"
+          alt="No Order"
+          className="mx-auto mb-6 w-72 h-auto"
+        />
+        <h2 className="text-xl font-bold mb-4 text-gray-500">{t("orders.noOrders")}</h2>
       </div>
     );
   }

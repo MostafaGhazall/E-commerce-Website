@@ -38,7 +38,7 @@ export default function Login() {
           onSubmit={handleLogin}
           className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg"
         >
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          <h2 className="text-3xl font-bold text-center text-[var(--primary-orange)] mb-8">
             {t("login.title")}
           </h2>
 
@@ -70,14 +70,14 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-3 bg-[var(--primary-sun)] text-black rounded-lg hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
           >
             {t("login.submit")}
           </button>
 
           <p className="mt-4 text-sm text-center text-gray-600">
             {t("login.noAccount")}{" "}
-            <Link to="/register" className="text-blue-600 hover:underline">
+            <Link to="/register" className="text-[var(--primary-amber)] hover:underline">
               {t("login.registerLink")}
             </Link>
           </p>

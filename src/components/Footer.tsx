@@ -31,7 +31,7 @@ export default function Footer() {
   // ];
 
   return (
-    <footer className="bg-gray-100 text-gray-700 mt-10" dir={isRTL ? "rtl" : "ltr"}>
+    <footer className="bg-gray-100 text-gray-700" dir={isRTL ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
         {/* Brand Description */}
         <div>
