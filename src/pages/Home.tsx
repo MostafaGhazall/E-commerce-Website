@@ -74,7 +74,6 @@ const Home = () => {
       </section>
 
       {/* Deals & Sale */}
-      {/* Deals & Sale */}
       <section className="max-w-7xl mx-auto pt-16 px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
         {[
           {

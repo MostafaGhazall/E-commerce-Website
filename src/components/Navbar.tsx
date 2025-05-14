@@ -162,10 +162,14 @@ export default function Navbar() {
               {profileOpen && (
                 <div className="absolute right-0 mt-2 bg-white text-gray-800 shadow-md rounded-md py-2 w-48 z-10">
                   {user && (
-                    <p className="px-4 py-2 text-sm text-gray-600 border-b border-[var(--primary-amber)]">
+                    <p
+                      className="px-4 py-2 text-sm text-gray-600 border-b border-[var(--primary-amber)] truncate overflow-hidden whitespace-nowrap"
+                      title={user.email}
+                    >
                       {user.email}
                     </p>
                   )}
+
                   <button
                     onClick={() => protectedNavigate("/profile")}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100"

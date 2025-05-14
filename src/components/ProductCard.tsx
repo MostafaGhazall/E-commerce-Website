@@ -20,7 +20,7 @@ const ProductCard = ({ product }: Props) => {
       title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
     >
       {isWishlisted ? (
-        <Heart className="text-red-500 w-5 h-5" />
+        <Heart className="text-red-500 w-5 h-5" fill="currentColor" />
       ) : (
         <HeartOff className="text-gray-400 w-5 h-5" />
       )}
@@ -29,7 +29,7 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div className="relative border border-gray-200 rounded-lg p-4 shadow hover:shadow-md transition bg-white text-gray-900 flex flex-col h-full">
-      {/* Wishlist Button (uses Link if not logged in) */}
+      {/* Wishlist Button */}
       {user ? (
         wishlistButton
       ) : (
